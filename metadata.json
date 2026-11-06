@@ -1,0 +1,6 @@
+{
+  "name": "QueueLess",
+  "description": "A web-based virtual queue management platform designed to eliminate physical waiting lines in colleges, campus facilities, and service centres.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

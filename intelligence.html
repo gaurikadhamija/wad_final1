@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QueueLess Intelligence — Predictive Analytics Engine</title>
+  <meta name="description" content="QueueLess Intelligence Dashboard. Predictive wait-time forecasting, peak-hour analysis, smart counter dispatch recommendations, and turn notification engine." />
+
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- QueueLess External Stylesheets (Pure CSS Architecture) -->
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/dashboard.css" />
+</head>
+<body>
+
+  <!-- Pure CSS Mobile Sidebar Drawer Toggle & Radio Tabs -->
+  <input type="checkbox" id="mobile-sidebar-toggle" class="sidebar-toggle-checkbox" />
+  <input type="radio" name="intel-tab" id="tab-intel-overview" class="tab-radio" checked />
+  <input type="radio" name="intel-tab" id="tab-intel-insights" class="tab-radio" />
+  <input type="radio" name="intel-tab" id="tab-intel-peak" class="tab-radio" />
+  <input type="radio" name="intel-tab" id="tab-intel-recs" class="tab-radio" />
+  <input type="radio" name="intel-tab" id="tab-intel-alerts" class="tab-radio" />
+
+  <div class="dashboard-layout">
+    <!-- Backdrop for mobile drawer -->
+    <label for="mobile-sidebar-toggle" class="mobile-sidebar-backdrop"></label>
+
+    <!-- Dedicated Sidebar Navigation (Pure CSS Labels) -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="./index.html" class="brand-logo">
+          <img class="brand-logo-icon" src="./assets/QL-logo.png" alt="QueueLess">
+          <span>QueueLess</span>
+        </a>
+        <span class="sidebar-role-badge" style="background-color: var(--color-fawn-light); color: var(--color-bole-dark);">
+          Predictive Engine
+        </span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <label for="tab-intel-overview" class="sidebar-tab-label nav-intel-overview">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          </span>
+          <span>Intelligence Overview</span>
+        </label>
+
+        <label for="tab-intel-insights" class="sidebar-tab-label nav-intel-insights">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </span>
+          <span>Waiting-Time Insights</span>
+        </label>
+
+        <label for="tab-intel-peak" class="sidebar-tab-label nav-intel-peak">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </span>
+          <span>Peak-Hour Analysis</span>
+        </label>
+
+        <label for="tab-intel-recs" class="sidebar-tab-label nav-intel-recs">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2z"/></svg>
+          </span>
+          <span>Smart Recommendations</span>
+        </label>
+
+        <label for="tab-intel-alerts" class="sidebar-tab-label nav-intel-alerts">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </span>
+          <span>Notifications</span>
+        </label>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-switcher-title">Switch System Role</div>
+        <div class="sidebar-switcher-links">
+          <a href="./user-dashboard.html" class="sidebar-switcher-link">
+            <span>Customer View</span>
+            <span>&rarr;</span>
+          </a>
+          <a href="./provider-dashboard.html" class="sidebar-switcher-link">
+            <span>Provider View</span>
+            <span>&rarr;</span>
+          </a>
+          <a href="./index.html" class="sidebar-switcher-link">
+            <span>Landing Page</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <div class="dashboard-main">
+      <!-- Top Navigation Bar -->
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <label for="mobile-sidebar-toggle" class="mobile-menu-label">
+            ☰ Menu
+          </label>
+          <div class="topbar-heading-group">
+            <div class="topbar-breadcrumb">Predictive System &nbsp;/&nbsp; <span class="topbar-active-page">Operational Analytics</span></div>
+            <h2 class="topbar-title">QueueLess Intelligence Engine</h2>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="topbar-system-indicator">
+            <span class="topbar-system-dot"></span>
+            <span>10:30 AM · Predictive Engine Active</span>
+          </div>
+
+          <div class="user-profile-badge">
+            <div class="user-avatar" style="background: var(--color-fawn);">QL</div>
+            <div class="user-info">
+              <span class="user-name">Predictive Forecaster</span>
+              <span class="user-role">Model v1.4 Active</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Viewport Content -->
+      <main class="dashboard-content">
+
+        <!-- ================================================================
+             TAB 1: INTELLIGENCE OVERVIEW
+             ================================================================ -->
+        <div id="tab-intel-overview" class="dashboard-tab-content panel-intel-overview">
+          <div style="margin-bottom: 24px;">
+            <div class="section-kicker">Autonomous Optimization System</div>
+            <h1 style="font-size: 1.85rem; margin-bottom: 6px;">Predictive Operations & Health</h1>
+            <p>Mathematical forecasting of counter congestion, throughput velocities, and queue dispersion.</p>
+          </div>
+
+          <!-- Statistic Cards -->
+          <div class="stats-grid">
+            <div class="stat-card stat-fawn">
+              <span class="stat-title">System Congestion Index</span>
+              <span class="stat-number tabular-nums">38%</span>
+              <span class="stat-subtext" style="color: var(--status-success);">Operating in Optimal Zone</span>
+            </div>
+
+            <div class="stat-card stat-pink">
+              <span class="stat-title">Forecasting Precision</span>
+              <span class="stat-number tabular-nums">94.2%</span>
+              <span class="stat-subtext">±1.8 mins confidence band</span>
+            </div>
+
+            <div class="stat-card stat-wheat">
+              <span class="stat-title">Predicted Peak Today</span>
+              <span class="stat-number">11:00 AM</span>
+              <span class="stat-subtext">Estimated 42 arrivals/hr</span>
+            </div>
+
+            <div class="stat-card stat-neutral">
+              <span class="stat-title">Dispatch Efficiency</span>
+              <span class="stat-number tabular-nums">+68%</span>
+              <span class="stat-subtext">Versus manual queueing</span>
+            </div>
+          </div>
+
+          <!-- Core System Capabilities Highlights -->
+          <div class="card" style="margin-bottom: 28px;">
+            <div class="card-header">
+              <div>
+                <span class="card-title">Algorithmic Optimization Pillars</span>
+                <div class="card-subtitle">Key architectural modules powering QueueLess Predictive Intelligence</div>
+              </div>
+              <span class="badge badge-success"><span class="badge-dot"></span>Models Calibrated</span>
+            </div>
+
+            <div class="grid grid-3 gap-6">
+              <div style="padding: 18px; border-radius: var(--radius-md); background: var(--color-bg); border: 1px solid var(--color-border);">
+                <div style="font-size: 1.5rem; margin-bottom: 8px;">⏱</div>
+                <h4 style="font-size: 1.05rem; margin-bottom: 6px; color: var(--color-bole-dark);">Waiting-Time Estimation</h4>
+                <p style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5;">
+                  Combines exponential moving averages of recent counter clearances with time-of-day rush multipliers to compute accurate turn arrival windows.
+                </p>
+              </div>
+
+              <div style="padding: 18px; border-radius: var(--radius-md); background: var(--color-bg); border: 1px solid var(--color-border);">
+                <div style="font-size: 1.5rem; margin-bottom: 8px;">📊</div>
+                <h4 style="font-size: 1.05rem; margin-bottom: 6px; color: var(--color-bole-dark);">Peak-Hour Modeling</h4>
+                <p style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5;">
+                  Correlates historical campus course schedule boundaries and class transitions to predict traffic spikes 45 minutes before they manifest.
+                </p>
+              </div>
+
+              <div style="padding: 18px; border-radius: var(--radius-md); background: var(--color-bg); border: 1px solid var(--color-border);">
+                <div style="font-size: 1.5rem; margin-bottom: 8px;">⚖️</div>
+                <h4 style="font-size: 1.05rem; margin-bottom: 6px; color: var(--color-bole-dark);">Dynamic Load Balancing</h4>
+                <p style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5;">
+                  Recommends counter assignments and staff shifts to prevent idle operator bottlenecks while keeping customer queue distribution uniform.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Navigation Callouts -->
+          <div class="grid grid-2 gap-6">
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Waiting-Time Telemetry</span>
+                <span class="badge badge-neutral">6 Campus Desks</span>
+              </div>
+              <p style="font-size: 0.885rem; color: var(--color-text-muted); margin-bottom: 16px;">
+                Review real-time service counter velocities and comparison metrics versus conventional physical waiting corridors.
+              </p>
+              <label for="tab-intel-insights" class="btn btn-outline btn-sm w-full">
+                Explore Waiting-Time Insights &rarr;
+              </label>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Peak-Hour Analysis</span>
+                <span class="badge badge-neutral">Hourly Intervals</span>
+              </div>
+              <p style="font-size: 0.885rem; color: var(--color-text-muted); margin-bottom: 16px;">
+                Analyze high, moderate, and low traffic density time slots to plan counter staffing and campus attendance windows.
+              </p>
+              <label for="tab-intel-peak" class="btn btn-outline btn-sm w-full">
+                Explore Peak-Hour Analysis &rarr;
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             TAB 2: WAITING-TIME INSIGHTS
+             ================================================================ -->
+        <div id="tab-intel-insights" class="dashboard-tab-content panel-intel-insights">
+          <div style="margin-bottom: 24px;">
+            <h1 style="font-size: 1.85rem; margin-bottom: 6px;">Waiting-Time Insights</h1>
+            <p>Comparative analysis between legacy physical queues and QueueLess virtual queue dispatching.</p>
+          </div>
+
+          <div class="card" style="margin-bottom: 28px;">
+            <div class="card-header">
+              <span class="card-title">Service-Wise Estimated Waiting Times</span>
+              <span class="badge badge-neutral">Campus Live Audit</span>
+            </div>
+
+            <div class="table-wrapper">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Service Desk</th>
+                    <th>Active Tokens</th>
+                    <th>Physical Queue Est.</th>
+                    <th>QueueLess Virtual Wait</th>
+                    <th>Customer Time Saved</th>
+                    <th>Efficiency Gain</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>College Administration Office</strong></td>
+                    <td class="tabular-nums">4 students</td>
+                    <td class="tabular-nums" style="color: #E74C3C; font-weight: 700;">45 mins standing</td>
+                    <td class="tabular-nums" style="color: #27AE60; font-weight: 700;">~14 mins remote</td>
+                    <td class="tabular-nums" style="font-weight: 700;">31 mins saved</td>
+                    <td><span class="badge badge-success"><span class="badge-dot"></span>+68% Faster</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Library Help Desk</strong></td>
+                    <td class="tabular-nums">2 students</td>
+                    <td class="tabular-nums" style="color: #E74C3C; font-weight: 700;">18 mins standing</td>
+                    <td class="tabular-nums" style="color: #27AE60; font-weight: 700;">~5 mins remote</td>
+                    <td class="tabular-nums" style="font-weight: 700;">13 mins saved</td>
+                    <td><span class="badge badge-success"><span class="badge-dot"></span>+72% Faster</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Campus Cafeteria Express</strong></td>
+                    <td class="tabular-nums">9 students</td>
+                    <td class="tabular-nums" style="color: #E74C3C; font-weight: 700;">35 mins hallway wait</td>
+                    <td class="tabular-nums" style="color: #27AE60; font-weight: 700;">~12 mins remote</td>
+                    <td class="tabular-nums" style="font-weight: 700;">23 mins saved</td>
+                    <td><span class="badge badge-success"><span class="badge-dot"></span>+65% Faster</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Medical Centre & Clinic</strong></td>
+                    <td class="tabular-nums">3 students</td>
+                    <td class="tabular-nums" style="color: #E74C3C; font-weight: 700;">28 mins lobby wait</td>
+                    <td class="tabular-nums" style="color: #27AE60; font-weight: 700;">~8 mins remote</td>
+                    <td class="tabular-nums" style="font-weight: 700;">20 mins saved</td>
+                    <td><span class="badge badge-success"><span class="badge-dot"></span>+71% Faster</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>IT Helpdesk & Wi-Fi Desk</strong></td>
+                    <td class="tabular-nums">1 student</td>
+                    <td class="tabular-nums" style="color: #E74C3C; font-weight: 700;">15 mins hallway wait</td>
+                    <td class="tabular-nums" style="color: #27AE60; font-weight: 700;">~4 mins remote</td>
+                    <td class="tabular-nums" style="font-weight: 700;">11 mins saved</td>
+                    <td><span class="badge badge-success"><span class="badge-dot"></span>+73% Faster</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Accounts & Fee Counter</strong></td>
+                    <td class="tabular-nums">7 students</td>
+                    <td class="tabular-nums" style="color: #E74C3C; font-weight: 700;">55 mins standing</td>
+                    <td class="tabular-nums" style="color: #27AE60; font-weight: 700;">~18 mins remote</td>
+                    <td class="tabular-nums" style="font-weight: 700;">37 mins saved</td>
+                    <td><span class="badge badge-success"><span class="badge-dot"></span>+67% Faster</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             TAB 3: PEAK-HOUR ANALYSIS
+             ================================================================ -->
+        <div id="tab-intel-peak" class="dashboard-tab-content panel-intel-peak">
+          <div style="margin-bottom: 24px;">
+            <h1 style="font-size: 1.85rem; margin-bottom: 6px;">Peak-Hour Analysis</h1>
+            <p>Time slot congestion analysis to help students plan visits and staff balance counters.</p>
+          </div>
+
+          <div class="card" style="margin-bottom: 28px;">
+            <div class="card-header">
+              <span class="card-title">Campus Traffic Schedule Breakdown</span>
+              <span class="badge badge-neutral">Based on 30-Day Moving Average</span>
+            </div>
+
+            <!-- Time slot 1 -->
+            <div style="padding: 16px; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+              <div style="min-width: 180px;">
+                <strong style="font-size: 1rem; color: var(--color-bole-dark);">09:00 AM – 10:00 AM</strong>
+                <div style="font-size: 0.75rem; color: var(--color-text-muted);">Morning Initialization</div>
+              </div>
+              <div style="flex: 1; min-width: 200px;">
+                <div class="progress-track" style="margin: 0;">
+                  <div class="progress-fill" style="width: 25%; background: #27AE60;"></div>
+                </div>
+              </div>
+              <span class="badge badge-success"><span class="badge-dot"></span>Low Traffic (~6m wait)</span>
+            </div>
+
+            <!-- Time slot 2 -->
+            <div style="padding: 16px; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+              <div style="min-width: 180px;">
+                <strong style="font-size: 1rem; color: var(--color-bole-dark);">10:00 AM – 12:00 PM</strong>
+                <div style="font-size: 0.75rem; color: var(--color-text-muted);">Morning Rush & Admissions</div>
+              </div>
+              <div style="flex: 1; min-width: 200px;">
+                <div class="progress-track" style="margin: 0;">
+                  <div class="progress-fill" style="width: 92%; background: #E74C3C;"></div>
+                </div>
+              </div>
+              <span class="badge badge-danger"><span class="badge-dot"></span>High Traffic (~22m wait)</span>
+            </div>
+
+            <!-- Time slot 3 -->
+            <div style="padding: 16px; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+              <div style="min-width: 180px;">
+                <strong style="font-size: 1rem; color: var(--color-bole-dark);">12:00 PM – 02:00 PM</strong>
+                <div style="font-size: 0.75rem; color: var(--color-text-muted);">Lunch Hour Shift</div>
+              </div>
+              <div style="flex: 1; min-width: 200px;">
+                <div class="progress-track" style="margin: 0;">
+                  <div class="progress-fill" style="width: 58%; background: #E67E22;"></div>
+                </div>
+              </div>
+              <span class="badge badge-warning"><span class="badge-dot"></span>Moderate (~14m wait)</span>
+            </div>
+
+            <!-- Time slot 4 -->
+            <div style="padding: 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+              <div style="min-width: 180px;">
+                <strong style="font-size: 1rem; color: var(--color-bole-dark);">02:00 PM – 04:00 PM</strong>
+                <div style="font-size: 0.75rem; color: var(--color-text-muted);">Afternoon Consultations</div>
+              </div>
+              <div style="flex: 1; min-width: 200px;">
+                <div class="progress-track" style="margin: 0;">
+                  <div class="progress-fill" style="width: 38%; background: #27AE60;"></div>
+                </div>
+              </div>
+              <span class="badge badge-success"><span class="badge-dot"></span>Low Traffic (~8m wait)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             TAB 4: RECOMMENDATIONS
+             ================================================================ -->
+        <div id="tab-intel-recs" class="dashboard-tab-content panel-intel-recs">
+          <div style="margin-bottom: 24px;">
+            <h1 style="font-size: 1.85rem; margin-bottom: 6px;">Smart Counter Recommendations</h1>
+            <p>Actionable operational suggestions generated from current queue loads and desk velocities.</p>
+          </div>
+
+          <div class="grid grid-2 gap-6">
+            <!-- Recommendation 1 -->
+            <div class="card" style="border-left: 4px solid var(--status-success);">
+              <div class="card-header">
+                <div>
+                  <h3 style="font-size: 1.15rem; color: var(--color-bole-dark);">Activate Counter 03 for Financial Aid</h3>
+                  <span class="card-subtitle">Resource Balancing Directive</span>
+                </div>
+                <span class="badge badge-success"><span class="badge-dot"></span>High Impact</span>
+              </div>
+              <div style="margin-bottom: 14px; font-size: 0.885rem; color: var(--color-text-main);">
+                <p><strong>Rationale:</strong> Accounts desk queue has climbed to 7 students with ~18 min wait. Counter 03 is currently idle and assigned officer Priya Nair is certified for fee vouchers.</p>
+                <div style="display: flex; gap: 16px; margin-top: 10px; font-size: 0.825rem; color: var(--color-text-muted);">
+                  <span>Projected Wait Reduction: <strong class="tabular-nums" style="color: var(--color-bole-dark);">-52%</strong></span>
+                  <span>Estimated Activation: <strong style="color: var(--color-bole-dark);">Immediate</strong></span>
+                </div>
+              </div>
+              <div style="padding-top: 12px; border-top: 1px solid var(--color-border-light); font-size: 0.785rem; color: var(--color-text-muted);">
+                <strong>Impact:</strong> Reduces Financial Desk queue from 18 minutes to ~8 minutes per customer.
+              </div>
+            </div>
+
+            <!-- Recommendation 2 -->
+            <div class="card" style="border-left: 4px solid var(--color-salmon-pink);">
+              <div class="card-header">
+                <div>
+                  <h3 style="font-size: 1.15rem; color: var(--color-bole-dark);">Encourage Pre-Verification for Admin</h3>
+                  <span class="card-subtitle">Process Optimization</span>
+                </div>
+                <span class="badge badge-pink"><span class="badge-dot"></span>Student Experience</span>
+              </div>
+              <div style="margin-bottom: 14px; font-size: 0.885rem; color: var(--color-text-main);">
+                <p><strong>Rationale:</strong> 42% of customer handle duration at Counter 02 is spent filling paper forms. Instructing students to fill digital bonafide forms in the portal will save 4 minutes per consultation.</p>
+                <div style="display: flex; gap: 16px; margin-top: 10px; font-size: 0.825rem; color: var(--color-text-muted);">
+                  <span>Average Time Saved: <strong class="tabular-nums" style="color: var(--color-bole-dark);">4.2 mins/student</strong></span>
+                </div>
+              </div>
+              <div style="padding-top: 12px; border-top: 1px solid var(--color-border-light); font-size: 0.785rem; color: var(--color-text-muted);">
+                <strong>Impact:</strong> Throughput velocity increases by +33% without adding personnel.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             TAB 5: NOTIFICATIONS
+             ================================================================ -->
+        <div id="tab-intel-alerts" class="dashboard-tab-content panel-intel-alerts">
+          <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h1 style="font-size: 1.85rem; margin-bottom: 6px;">Notification Center</h1>
+              <p>Simulated customer dispatch alerts, queue updates, and turn announcements.</p>
+            </div>
+            <span class="badge badge-success" style="padding: 6px 12px; font-size: 0.85rem;">
+              <span class="badge-dot"></span> Push Dispatcher Active
+            </span>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Recent Notification Feed</span>
+              <span class="badge badge-neutral">Automated Campus Messages</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <!-- Alert 1 -->
+              <div style="padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--color-misty-rose); background: var(--color-misty-rose-light); display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                    <span class="badge badge-pink"><span class="badge-dot"></span>Turn Approaching</span>
+                    <strong style="font-size: 1rem; color: var(--color-bole-dark);">Token QL-104 Alert</strong>
+                  </div>
+                  <p style="font-size: 0.885rem; color: var(--color-text-main); margin-top: 4px;">
+                    "Your turn is approaching! Only 2 customers ahead of you for College Administration Office. Please begin walking to Room 104."
+                  </p>
+                </div>
+                <span class="tabular-nums" style="font-size: 0.775rem; color: var(--color-text-muted);">10:28 AM</span>
+              </div>
+
+              <!-- Alert 2 -->
+              <div style="padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--color-wheat); background: var(--color-wheat-light); display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                    <span class="badge badge-warning"><span class="badge-dot"></span>Queue Status Updated</span>
+                    <strong style="font-size: 1rem; color: var(--color-bole-dark);">Counter 02 Processing Speed Increased</strong>
+                  </div>
+                  <p style="font-size: 0.885rem; color: var(--color-text-main); margin-top: 4px;">
+                    "Good news: Estimated wait time for College Administration dropped by 5 minutes due to rapid stamp verifications."
+                  </p>
+                </div>
+                <span class="tabular-nums" style="font-size: 0.775rem; color: var(--color-text-muted);">10:22 AM</span>
+              </div>
+
+              <!-- Alert 3 -->
+              <div style="padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--color-border); background: var(--color-surface); display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                    <span class="badge badge-success"><span class="badge-dot"></span>Counter Information</span>
+                    <strong style="font-size: 1rem; color: var(--color-bole-dark);">Counter 03 Opened</strong>
+                  </div>
+                  <p style="font-size: 0.885rem; color: var(--color-text-main); margin-top: 4px;">
+                    "Counter 03 has been activated for Scholarship and Accounts. Wait times at Financial Window reduced to ~7 minutes."
+                  </p>
+                </div>
+                <span class="tabular-nums" style="font-size: 0.775rem; color: var(--color-text-muted);">10:05 AM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+  <script type="module" src="./js/api.js"></script>
+  <script type="module" src="./js/script.js"></script>
+  <script type="module" src="./js/intelligence_dashboard.js"></script>
+</body>
+</html>

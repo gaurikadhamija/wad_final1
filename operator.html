@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desk Counter Operator — QueueLess</title>
+  <meta name="description" content="QueueLess Desk Operator Terminal. Call tokens, process consultations, mark completions, and manage waiting students." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- QueueLess External Stylesheets -->
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/dashboard.css" />
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <!-- Dedicated Sidebar Navigation -->
+    <aside class="sidebar" style="position: static; transform: none; box-shadow: none;">
+      <div class="sidebar-header">
+        <a href="./index.html" class="brand-logo">
+          <img class="brand-logo-icon" src="./assets/QL-logo.png" alt="QueueLess">
+          <span>QueueLess</span>
+        </a>
+        <span class="sidebar-role-badge" style="background-color: var(--color-misty-rose); color: var(--color-bole-dark);">
+          Operator Station
+        </span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#active-counter" class="sidebar-tab-label active" style="text-decoration: none; color: inherit;">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </span>
+          <span>My Counter</span>
+        </a>
+        <a href="#queue-line" class="sidebar-tab-label" style="text-decoration: none; color: inherit;">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          </span>
+          <span>Waiting Line</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-switcher-title">Switch System Role</div>
+        <div class="sidebar-switcher-links">
+          <a href="./student.html" class="sidebar-switcher-link">
+            <span>Student Portal</span>
+            <span>&rarr;</span>
+          </a>
+          <a href="./provider.html" class="sidebar-switcher-link">
+            <span>Provider Console</span>
+            <span>&rarr;</span>
+          </a>
+          <a href="./admin.html" class="sidebar-switcher-link">
+            <span>Admin Console</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <div class="topbar-heading-group">
+            <div class="topbar-breadcrumb">Operator Desk &nbsp;/&nbsp; <span class="topbar-active-page">Counter 02 (Room 104)</span></div>
+            <h2 class="topbar-title">Desk Operator Terminal</h2>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="topbar-system-indicator">
+            <span class="topbar-system-dot"></span>
+            <span>Campus Synchronized</span>
+          </div>
+
+          <div class="user-profile-badge">
+            <div class="user-avatar" style="background: var(--color-bole);">SV</div>
+            <div class="user-info">
+              <span class="user-name">Dr. Sarah Vance</span>
+              <span class="user-role">Counter Operator</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-content">
+        <!-- Live Calling Station Hero Card -->
+        <div class="card" style="margin-bottom: 24px; padding: 28px; background: #FFFFFF; border-radius: 16px; border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
+            <div>
+              <span class="badge badge-success" style="margin-bottom: 8px;"><span class="badge-dot"></span>Online & Ready</span>
+              <h2 style="font-size: 1.6rem; color: var(--color-bole-dark); margin: 0;">Active Counter: Counter 02</h2>
+              <p style="margin: 4px 0 0 0; color: var(--color-text-muted);">Assigned Service: College Administration Office (Dean Office Attestations)</p>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-text-muted); font-weight: 700; letter-spacing: 0.05em;">Currently Serving</span>
+              <div id="op-current-token-display" style="font-family: var(--font-display); font-size: 2.8rem; font-weight: 900; color: var(--color-salmon-pink); line-height: 1.1;">
+                QL-102
+              </div>
+            </div>
+          </div>
+
+          <!-- Operator Control Buttons -->
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; padding-top: 20px; border-top: 1px solid var(--color-border-light);">
+            <button id="btn-op-call-next" type="button" class="btn btn-primary btn-lg" style="flex: 1; min-width: 180px; justify-content: center;">
+              📢 Call Next Student
+            </button>
+            <button id="btn-op-complete" type="button" class="btn btn-outline btn-lg" style="flex: 1; min-width: 180px; justify-content: center; border-color: #27AE60; color: #27AE60;">
+              ✓ Complete Service
+            </button>
+            <button id="btn-op-recall" type="button" class="btn btn-outline btn-lg" style="min-width: 140px; justify-content: center;">
+              🔔 Recall
+            </button>
+            <button id="btn-op-no-show" type="button" class="btn btn-outline btn-lg" style="min-width: 140px; justify-content: center; border-color: #E74C3C; color: #E74C3C;">
+              ✕ No-Show
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Queue Line Table -->
+        <div class="card" style="padding: 24px; background: #FFFFFF; border-radius: 16px; border: 1px solid var(--color-border);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 style="font-size: 1.2rem; color: var(--color-bole-dark); margin: 0;">Waiting Line (Database Records)</h3>
+            <span id="op-queue-badge" class="badge badge-pink">4 Students Waiting</span>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="custom-table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="text-align: left; border-bottom: 2px solid var(--color-border-light);">
+                  <th style="padding: 10px;">Token</th>
+                  <th style="padding: 10px;">Student Name</th>
+                  <th style="padding: 10px;">Service</th>
+                  <th style="padding: 10px;">Status</th>
+                  <th style="padding: 10px;">Booked Time</th>
+                  <th style="padding: 10px; text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="op-queue-tbody">
+                <tr>
+                  <td style="padding: 12px 10px;"><strong>QL-103</strong></td>
+                  <td style="padding: 12px 10px;">Tanvi Sharma</td>
+                  <td style="padding: 12px 10px;">Administration</td>
+                  <td style="padding: 12px 10px;"><span class="badge badge-warning"><span class="badge-dot"></span>Waiting</span></td>
+                  <td style="padding: 12px 10px;" class="tabular-nums">10:20 AM</td>
+                  <td style="padding: 12px 10px; text-align: right;"><button type="button" class="btn btn-primary btn-sm btn-call-specific" data-token="QL-103">Call</button></td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 10px;"><strong>QL-104</strong></td>
+                  <td style="padding: 12px 10px;">Alex Morgan</td>
+                  <td style="padding: 12px 10px;">Administration</td>
+                  <td style="padding: 12px 10px;"><span class="badge badge-warning"><span class="badge-dot"></span>Waiting</span></td>
+                  <td style="padding: 12px 10px;" class="tabular-nums">10:24 AM</td>
+                  <td style="padding: 12px 10px; text-align: right;"><button type="button" class="btn btn-primary btn-sm btn-call-specific" data-token="QL-104">Call</button></td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 10px;"><strong>QL-105</strong></td>
+                  <td style="padding: 12px 10px;">Rohan Gupta</td>
+                  <td style="padding: 12px 10px;">Administration</td>
+                  <td style="padding: 12px 10px;"><span class="badge badge-warning"><span class="badge-dot"></span>Waiting</span></td>
+                  <td style="padding: 12px 10px;" class="tabular-nums">10:28 AM</td>
+                  <td style="padding: 12px 10px; text-align: right;"><button type="button" class="btn btn-primary btn-sm btn-call-specific" data-token="QL-105">Call</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="./js/api.js"></script>
+  <script type="module" src="./js/script.js"></script>
+  <script type="module" src="./js/provider_dashboard.js"></script>
+</body>
+</html>

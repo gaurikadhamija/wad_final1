@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QueueLess — Your Time Matters. Waiting Doesn't.</title>
+  <meta name="description" content="QueueLess is a web-based virtual queue management platform designed to eliminate physical waiting lines in colleges, campus facilities, and service centres." />
+  <meta property="og:title" content="QueueLess — Your Time Matters. Waiting Doesn't." />
+  <meta property="og:description" content="Explore campus services, join queues remotely through virtual tokens, and monitor real-time queue positions." />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- QueueLess External Stylesheet -->
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+  <!-- Ambient Living Animated Background Layer -->
+  <div class="ambient-background-layer" aria-hidden="true">
+    <div class="ambient-orbs-container">
+      <div class="ambient-orb orb-1"></div>
+      <div class="ambient-orb orb-2"></div>
+      <div class="ambient-orb orb-3"></div>
+      <div class="ambient-orb orb-4"></div>
+    </div>
+    <canvas id="ambient-canvas" class="ambient-canvas"></canvas>
+  </div>
+
+  <!-- Top Academic / Demo Switcher Banner -->
+  <div class="demo-banner">
+    <div class="container demo-banner-content">
+      <div class="demo-banner-tag">
+        <span>QueueLess Platform</span>
+      </div>
+      <div class="demo-banner-links">
+        <span style="color: var(--color-text-muted);">Switch View:</span>
+        <a href="./user-dashboard.html" class="demo-banner-link">Student Portal</a>
+        <a href="./provider-dashboard.html" class="demo-banner-link">Service Provider</a>
+        <a href="./intelligence.html" class="demo-banner-link">AI Intelligence</a>
+        <a href="./about.html" class="demo-banner-link">About Project</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Site Header & Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="./index.html" class="brand-logo">
+        <img class="brand-logo-icon" src="./assets/QL-logo.png" alt="QueueLess">
+        <span>QueueLess</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="./index.html" class="nav-link active">Home</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#popular-services" class="nav-link">Explore Services</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="./about.html" class="nav-link">About</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn btn-outline btn-sm" data-modal-open="login-modal">
+          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Sign In
+        </button>
+        <a href="./user-dashboard.html" class="btn btn-primary btn-sm">
+          Get Started
+          <svg class="icon-svg" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-kicker-pill">
+            <span class="hero-kicker-dot"></span>
+            <span>Virtual Queue Management Platform</span>
+          </div>
+
+          <h1 class="hero-title">
+            Less Waiting. <br />
+            <span class="highlight">More Living.</span>
+          </h1>
+
+          <p class="hero-desc">
+            Skip the physical queue. Join virtually, track your turn in real time, and spend your valuable hours doing what actually matters.
+          </p>
+
+          <div class="hero-cta">
+            <a href="./user-dashboard.html" class="btn btn-primary btn-lg">
+              <svg class="icon-svg" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 15h0M2 9.5h20"/></svg>
+              Join a Queue
+            </a>
+            <a href="#popular-services" class="btn btn-secondary btn-lg">
+              Explore Services
+            </a>
+          </div>
+
+          <!-- Academic / Trust Metrics Strip -->
+          <div class="hero-trust-metrics">
+            <div class="trust-item">
+              <span class="trust-value tabular-nums" data-counter-target="74" data-counter-suffix="%">74%</span>
+              <span class="trust-label">Reduction in hallway congestion</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-value tabular-nums" data-counter-target="18" data-counter-suffix=" mins">18 mins</span>
+              <span class="trust-label">Average student wait saved</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-value tabular-nums" data-counter-target="6" data-counter-suffix=" Counters">6 Counters</span>
+              <span class="trust-label">Active campus desks ready</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Authentic Virtual Token Ticket (Hero Feature Showcase) -->
+        <div class="token-card-showcase">
+          <div class="token-ticket-header">
+            <div class="ticket-brand">
+              <span style="display:inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--color-salmon-pink);"></span>
+              <span>Virtual Boarding Pass</span>
+            </div>
+            <span class="badge badge-success"><span class="badge-dot"></span>Live Status · Waiting</span>
+          </div>
+
+          <div class="ticket-number-box">
+            <span class="ticket-token-label">Assigned Token ID</span>
+            <div class="ticket-token-id tabular-nums" id="hero-sample-token">QL-104</div>
+            <p style="font-size: 0.825rem; color: var(--color-text-muted); margin-top: 4px;">
+              Bearer: <strong>Alex Morgan (Student #2026-4091)</strong>
+            </p>
+          </div>
+
+          <div class="ticket-details-grid">
+            <div class="ticket-detail-item">
+              <span class="ticket-detail-label">Service Desk</span>
+              <span class="ticket-detail-value">College Administration</span>
+            </div>
+            <div class="ticket-detail-item">
+              <span class="ticket-detail-label">Service Counter</span>
+              <span class="ticket-detail-value">Counter 02 (Room 104)</span>
+            </div>
+            <div class="ticket-detail-item">
+              <span class="ticket-detail-label">People Ahead</span>
+              <span class="ticket-detail-value tabular-nums" id="hero-sample-ahead" style="color: var(--color-salmon-pink); font-size: 1.15rem;">
+                4 people
+              </span>
+            </div>
+            <div class="ticket-detail-item">
+              <span class="ticket-detail-label">Estimated Wait</span>
+              <span class="ticket-detail-value tabular-nums" id="hero-sample-wait">20 minutes</span>
+            </div>
+          </div>
+
+          <div class="progress-bar-container">
+            <div class="progress-labels">
+              <span>Queue Lifecycle Progress</span>
+              <span id="hero-sample-pct" class="tabular-nums">60%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="hero-sample-bar" style="width: 60%;"></div>
+            </div>
+          </div>
+
+          <div style="margin-top: 20px; display: flex; gap: 10px;">
+            <a href="./user-dashboard.html" class="btn btn-outline btn-sm w-full">
+              <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              View Live Tracker
+            </a>
+            <a href="./user-dashboard.html" class="btn btn-primary btn-sm w-full">
+              Open Full Tracker
+            </a>
+          </div>
+
+          <!-- Pure CSS Barcode Strip -->
+          <div class="ticket-barcode-wrap">
+            <div class="ticket-barcode">
+              <div class="barcode-line" style="width: 2px;"></div>
+              <div class="barcode-line" style="width: 4px;"></div>
+              <div class="barcode-line" style="width: 1px;"></div>
+              <div class="barcode-line" style="width: 3px;"></div>
+              <div class="barcode-line" style="width: 2px;"></div>
+              <div class="barcode-line" style="width: 5px;"></div>
+              <div class="barcode-line" style="width: 1px;"></div>
+              <div class="barcode-line" style="width: 3px;"></div>
+              <div class="barcode-line" style="width: 2px;"></div>
+              <div class="barcode-line" style="width: 4px;"></div>
+              <div class="barcode-line" style="width: 2px;"></div>
+              <div class="barcode-line" style="width: 1px;"></div>
+              <div class="barcode-line" style="width: 4px;"></div>
+              <div class="barcode-line" style="width: 3px;"></div>
+              <div class="barcode-line" style="width: 2px;"></div>
+              <div class="barcode-line" style="width: 5px;"></div>
+              <div class="barcode-line" style="width: 2px;"></div>
+              <div class="barcode-line" style="width: 3px;"></div>
+            </div>
+            <span class="barcode-num tabular-nums">QL-2026-ADM-104</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section reveal-on-scroll">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Simple 4-Step Process</div>
+          <h2 class="section-title">How QueueLess Transforms Waiting</h2>
+          <p class="lead" style="margin: 0 auto;">
+            Say goodbye to crowded hallways, standing in line for hours, and guessing when the counter officer will attend to you.
+          </p>
+        </div>
+
+        <div class="grid grid-4 gap-6">
+          <div class="step-card">
+            <div class="step-header">
+              <div class="step-badge tabular-nums">01</div>
+              <svg class="icon-svg icon-svg-lg step-icon-svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <h3 class="step-title">Discover a Service</h3>
+            <p class="step-desc">
+              Browse campus desks, view real-time waiting times, and check how many people are currently in queue.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-header">
+              <div class="step-badge tabular-nums">02</div>
+              <svg class="icon-svg icon-svg-lg step-icon-svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <h3 class="step-title">Join the Virtual Queue</h3>
+            <p class="step-desc">
+              Request a token with a single tap. Your place in line is saved digitally with complete algorithmic fairness.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-header">
+              <div class="step-badge tabular-nums">03</div>
+              <svg class="icon-svg icon-svg-lg step-icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3 class="step-title">Track Your Token</h3>
+            <p class="step-desc">
+              Relax in the library or cafeteria while monitoring your position, estimated minutes, and current serving token.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-header">
+              <div class="step-badge tabular-nums">04</div>
+              <svg class="icon-svg icon-svg-lg step-icon-svg" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h3 class="step-title">Get Served On Time</h3>
+            <p class="step-desc">
+              Receive smart turn-approaching alerts and walk straight to your designated counter when called.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Services Section -->
+    <section id="popular-services" class="section section-alt reveal-on-scroll">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Available Campus Services</div>
+          <h2 class="section-title">Explore Active Counters & Wait Times</h2>
+          <p class="lead" style="margin: 0 auto;">
+            Live campus service desks currently operating on QueueLess virtual queue system.
+          </p>
+        </div>
+
+        <div class="grid grid-3 gap-6">
+          <!-- Service 1 -->
+          <div class="service-card">
+            <div>
+              <div class="service-top">
+                <div>
+                  <h3 class="service-name">College Administration Office</h3>
+                  <span class="service-category">Administration · Main Building 102</span>
+                </div>
+                <span class="badge badge-success"><span class="badge-dot"></span>Normal</span>
+              </div>
+              <p style="font-size: 0.865rem; color: var(--color-text-muted); margin-bottom: 10px;">
+                Admissions, bonafide certificates, transfer forms, and official stampings.
+              </p>
+              <div class="service-metrics-row">
+                <div class="service-metric">
+                  <span class="service-metric-label">Estimated Wait</span>
+                  <span class="service-metric-value tabular-nums">~18 mins</span>
+                </div>
+                <div class="service-metric">
+                  <span class="service-metric-label">Waiting in Queue</span>
+                  <span class="service-metric-value tabular-nums">6 students</span>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 14px;">
+              <a href="./user-dashboard.html" class="btn btn-primary w-full btn-sm">
+                <svg class="icon-svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Join Virtual Queue
+              </a>
+            </div>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="service-card">
+            <div>
+              <div class="service-top">
+                <div>
+                  <h3 class="service-name">Library Help Desk</h3>
+                  <span class="service-category">Academic · Central Library</span>
+                </div>
+                <span class="badge badge-success"><span class="badge-dot"></span>Fast</span>
+              </div>
+              <p style="font-size: 0.865rem; color: var(--color-text-muted); margin-bottom: 10px;">
+                Book issues, returns, digital catalog access, and reference assistance.
+              </p>
+              <div class="service-metrics-row">
+                <div class="service-metric">
+                  <span class="service-metric-label">Estimated Wait</span>
+                  <span class="service-metric-value tabular-nums">~5 mins</span>
+                </div>
+                <div class="service-metric">
+                  <span class="service-metric-label">Waiting in Queue</span>
+                  <span class="service-metric-value tabular-nums">2 students</span>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 14px;">
+              <a href="./user-dashboard.html" class="btn btn-primary w-full btn-sm">
+                <svg class="icon-svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Join Virtual Queue
+              </a>
+            </div>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="service-card">
+            <div>
+              <div class="service-top">
+                <div>
+                  <h3 class="service-name">Campus Cafeteria Express</h3>
+                  <span class="service-category">Dining · Student Center Annex</span>
+                </div>
+                <span class="badge badge-warning"><span class="badge-dot"></span>Moderate</span>
+              </div>
+              <p style="font-size: 0.865rem; color: var(--color-text-muted); margin-bottom: 10px;">
+                Pre-order meal collection, lunch token processing, and drink counter.
+              </p>
+              <div class="service-metrics-row">
+                <div class="service-metric">
+                  <span class="service-metric-label">Estimated Wait</span>
+                  <span class="service-metric-value tabular-nums">~12 mins</span>
+                </div>
+                <div class="service-metric">
+                  <span class="service-metric-label">Waiting in Queue</span>
+                  <span class="service-metric-value tabular-nums">9 students</span>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 14px;">
+              <a href="./user-dashboard.html" class="btn btn-primary w-full btn-sm">
+                <svg class="icon-svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Join Virtual Queue
+              </a>
+            </div>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="service-card">
+            <div>
+              <div class="service-top">
+                <div>
+                  <h3 class="service-name">Medical Centre & Clinic</h3>
+                  <span class="service-category">Health · Block C Pavilion</span>
+                </div>
+                <span class="badge badge-success"><span class="badge-dot"></span>Normal</span>
+              </div>
+              <p style="font-size: 0.865rem; color: var(--color-text-muted); margin-bottom: 10px;">
+                Routine check-ups, doctor consultations, and first-aid dispensations.
+              </p>
+              <div class="service-metrics-row">
+                <div class="service-metric">
+                  <span class="service-metric-label">Estimated Wait</span>
+                  <span class="service-metric-value tabular-nums">~8 mins</span>
+                </div>
+                <div class="service-metric">
+                  <span class="service-metric-label">Waiting in Queue</span>
+                  <span class="service-metric-value tabular-nums">3 students</span>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 14px;">
+              <a href="./user-dashboard.html" class="btn btn-primary w-full btn-sm">
+                <svg class="icon-svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Join Virtual Queue
+              </a>
+            </div>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="service-card">
+            <div>
+              <div class="service-top">
+                <div>
+                  <h3 class="service-name">Student Support Desk</h3>
+                  <span class="service-category">Academic · Room 204</span>
+                </div>
+                <span class="badge badge-success"><span class="badge-dot"></span>Normal</span>
+              </div>
+              <p style="font-size: 0.865rem; color: var(--color-text-muted); margin-bottom: 10px;">
+                Course registrations, timetable clarifications, and academic counseling.
+              </p>
+              <div class="service-metrics-row">
+                <div class="service-metric">
+                  <span class="service-metric-label">Estimated Wait</span>
+                  <span class="service-metric-value tabular-nums">~15 mins</span>
+                </div>
+                <div class="service-metric">
+                  <span class="service-metric-label">Waiting in Queue</span>
+                  <span class="service-metric-value tabular-nums">5 students</span>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 14px;">
+              <a href="./user-dashboard.html" class="btn btn-primary w-full btn-sm">
+                <svg class="icon-svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Join Virtual Queue
+              </a>
+            </div>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="service-card">
+            <div>
+              <div class="service-top">
+                <div>
+                  <h3 class="service-name">Fee Payment Counter</h3>
+                  <span class="service-category">Finance · Accounts Window 4</span>
+                </div>
+                <span class="badge badge-danger"><span class="badge-dot"></span>High Demand</span>
+              </div>
+              <p style="font-size: 0.865rem; color: var(--color-text-muted); margin-bottom: 10px;">
+                Semester fee verification, scholarship vouchers, and hall ticket receipts.
+              </p>
+              <div class="service-metrics-row">
+                <div class="service-metric">
+                  <span class="service-metric-label">Estimated Wait</span>
+                  <span class="service-metric-value tabular-nums">~25 mins</span>
+                </div>
+                <div class="service-metric">
+                  <span class="service-metric-label">Waiting in Queue</span>
+                  <span class="service-metric-value tabular-nums">11 students</span>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 14px;">
+              <a href="./user-dashboard.html" class="btn btn-primary w-full btn-sm">
+                <svg class="icon-svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Join Virtual Queue
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+          <a href="./user-dashboard.html" class="btn btn-secondary">
+            View All Services in User Dashboard &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section reveal-on-scroll">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Core System Capabilities</div>
+          <h2 class="section-title">Engineered for Frictionless Efficiency</h2>
+          <p class="lead" style="margin: 0 auto;">
+            A complete suite of queue management tools crafted for students, service officers, and facility administrators.
+          </p>
+        </div>
+
+        <div class="grid grid-3 gap-6">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg class="icon-svg icon-svg-lg" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 15h0M2 9.5h20"/></svg>
+            </div>
+            <h3 class="feature-title">Virtual Token Management</h3>
+            <p class="feature-desc">
+              Issues clean, sequential digital tokens that eliminate the need for physical slips, handwritten sign-in sheets, or standing in hallway lines.
+            </p>
+            <div class="feature-meta">
+              <span>Customer Feature</span> · <span>Instant Generation</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg class="icon-svg icon-svg-lg" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h3 class="feature-title">Queue Position Tracking</h3>
+            <p class="feature-desc">
+              Real-time synchronization of people ahead of you, your expected window, and the exact token currently undergoing consultation.
+            </p>
+            <div class="feature-meta">
+              <span>Live Tracking</span> · <span>Zero Guesswork</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg class="icon-svg icon-svg-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3 class="feature-title">Waiting-Time Estimation</h3>
+            <p class="feature-desc">
+              Algorithmic calculations based on historical handling duration per counter, preventing students from arriving too early or missing turns.
+            </p>
+            <div class="feature-meta">
+              <span>Predictive Metric</span> · <span>Dynamic Calculations</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg class="icon-svg icon-svg-lg" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 class="feature-title">Smart Counter Recommendations</h3>
+            <p class="feature-desc">
+              Distributes load across idle or lower-traffic desks, preventing single-counter bottlenecks during peak semester registration rushes.
+            </p>
+            <div class="feature-meta">
+              <span>Provider Feature</span> · <span>Load Balancing</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg class="icon-svg icon-svg-lg" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <h3 class="feature-title">Peak-Hour Insights</h3>
+            <p class="feature-desc">
+              Color-coded time-slot traffic indices allow customers to schedule campus visits during quiet morning or late afternoon windows.
+            </p>
+            <div class="feature-meta">
+              <span>Intelligence Suite</span> · <span>Traffic Indices</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg class="icon-svg icon-svg-lg" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <h3 class="feature-title">Service Analytics</h3>
+            <p class="feature-desc">
+              Executive overview of total tokens processed, average handling time per desk, and counter-level throughput for administrative reporting.
+            </p>
+            <div class="feature-meta">
+              <span>Admin Console</span> · <span>Audit Reports</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Specialized Dashboards Callout -->
+    <section class="section section-alt reveal-on-scroll" style="text-align: center;">
+      <div class="container" style="max-width: 820px;">
+        <span class="badge badge-pink" style="margin-bottom: 14px;"><span class="badge-dot"></span>Web Application Development Project</span>
+        <h2 style="font-size: clamp(2rem, 3.6vw, 2.7rem); margin-bottom: 16px;">
+          Experience all three specialised dashboards
+        </h2>
+        <p class="lead" style="margin: 0 auto 32px auto;">
+          QueueLess provides dedicated interfaces for customers, desk administrators, and intelligent future-forecasting engines.
+        </p>
+
+        <div class="flex justify-center gap-4" style="flex-wrap: wrap;">
+          <a href="./user-dashboard.html" class="btn btn-primary btn-lg">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Student Dashboard
+          </a>
+          <a href="./provider-dashboard.html" class="btn btn-secondary btn-lg">
+            <svg class="icon-svg" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            Service Provider
+          </a>
+          <a href="./intelligence.html" class="btn btn-outline btn-lg">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            QueueLess Intelligence
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Login Modal Dialog (Pure CSS :target) -->
+  <div id="login-modal" class="modal-overlay">
+    <a href="#" class="modal-overlay-backdrop-link" style="position: absolute; inset: 0;" aria-label="Close dialog"></a>
+    <div class="modal-box" style="position: relative; z-index: 2;">
+      <div class="modal-header">
+        <h3 class="modal-title">Sign In to QueueLess</h3>
+        <a href="#" class="modal-close-btn">&times;</a>
+      </div>
+
+      <form id="demo-login-form" action="./user-dashboard.html" method="get">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Student ID or College Email</label>
+          <input type="text" id="login-email" class="form-control" placeholder="e.g. alex.morgan@college.edu or 2026-4091" value="alex.morgan@college.edu" required />
+          <p class="form-help">Enter any student ID or faculty email for demo access.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <input type="password" id="login-password" class="form-control" placeholder="••••••••" value="demo1234" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="login-role">Select Dashboard View</label>
+          <select id="login-role" class="form-control">
+            <option value="user">Student / Customer Dashboard</option>
+            <option value="provider">Service Desk / Staff Provider Dashboard</option>
+            <option value="intelligence">QueueLess Intelligence Dashboard</option>
+          </select>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
+          <a href="#" class="btn btn-outline">Cancel</a>
+          <button type="submit" class="btn btn-primary">Proceed to Dashboard</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <img class="brand-logo-icon" src="./assets/QL-logo.png" alt="QueueLess" style="width: 28px; height: 28px">
+            <span>QueueLess</span>
+          </div>
+          <p class="footer-tagline">
+            Your Time Matters. Waiting Doesn't. A modern virtual queue management platform designed for universities, hospitals, and campus desks.
+          </p>
+          <span class="footer-badge-academic">Academic Project · First-Year Engineering (WAD)</span>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Platform</h4>
+          <ul class="footer-links">
+            <li><a href="./index.html" class="footer-link">Home</a></li>
+            <li><a href="./user-dashboard.html" class="footer-link">User Dashboard</a></li>
+            <li><a href="./provider-dashboard.html" class="footer-link">Provider Dashboard</a></li>
+            <li><a href="./intelligence.html" class="footer-link">QueueLess Intelligence</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Campus Services</h4>
+          <ul class="footer-links">
+            <li><a href="./user-dashboard.html" class="footer-link">College Administration</a></li>
+            <li><a href="./user-dashboard.html" class="footer-link">Library Desk</a></li>
+            <li><a href="./user-dashboard.html" class="footer-link">Fee Payment Counter</a></li>
+            <li><a href="./user-dashboard.html" class="footer-link">Medical Centre</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">About & Syllabus</h4>
+          <ul class="footer-links">
+            <li><a href="./about.html" class="footer-link">Project Overview</a></li>
+            <li><a href="./about.html#problem" class="footer-link">The Physical Queue Problem</a></li>
+            <li><a href="./about.html#architecture" class="footer-link">HTML/CSS Architecture</a></li>
+            <li><a href="./about.html#future-scope" class="footer-link">Future Scope & Roadmap</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 QueueLess Virtual Queue Systems. Built for College Web Application Development examination.</div>
+        <div>Strictly Pure HTML5 & CSS3 Architecture (Zero JavaScript)</div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="./js/api.js"></script>
+  <script type="module" src="./js/script.js"></script>
+</body>
+</html>

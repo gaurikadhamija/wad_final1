@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About QueueLess — Project Overview & Academic Architecture</title>
+  <meta name="description" content="About QueueLess: Problem statement, why virtual queues matter, how QueueLess transforms campus service efficiency, and future scope." />
+
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- QueueLess External Stylesheet -->
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+  <!-- Top Academic Banner -->
+  <div class="demo-banner">
+    <div class="container demo-banner-content">
+      <div class="demo-banner-tag">
+        <span>QueueLess Platform</span>
+      </div>
+      <div class="demo-banner-links">
+        <span style="color: var(--color-text-muted);">Switch View:</span>
+        <a href="./user-dashboard.html" class="demo-banner-link">Student Portal</a>
+        <a href="./provider-dashboard.html" class="demo-banner-link">Service Provider</a>
+        <a href="./intelligence.html" class="demo-banner-link">AI Intelligence</a>
+        <a href="./about.html" class="demo-banner-link active-view">About Project</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Site Header & Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="./index.html" class="brand-logo">
+        <img class="brand-logo-icon" src="./assets/QL-logo.png" alt="QueueLess">
+        <span>QueueLess</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="./index.html" class="nav-link">Home</a>
+        <a href="./index.html#how-it-works" class="nav-link">How It Works</a>
+        <a href="./index.html#popular-services" class="nav-link">Explore Services</a>
+        <a href="./index.html#features" class="nav-link">Features</a>
+        <a href="./about.html" class="nav-link active">About</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="./user-dashboard.html" class="btn btn-primary btn-sm">
+          Launch Portal
+          <svg class="icon-svg" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- About Page Hero -->
+    <section class="hero-section" style="padding: 60px 0 68px 0;">
+      <div class="container" style="max-width: 920px; text-align: center;">
+        <span class="badge badge-pink" style="margin-bottom: 14px;"><span class="badge-dot"></span>Web Application Development Project</span>
+        <h1 style="font-size: clamp(2.4rem, 4.2vw, 3.6rem); margin-bottom: 16px;">
+          Your Time Matters. <br />
+          <span style="color: var(--color-salmon-pink);">Waiting Doesn't.</span>
+        </h1>
+        <p class="lead" style="margin: 0 auto;">
+          QueueLess is an academic engineering project exploring how modern, lightweight web technologies can replace stressful physical queues with elegant, human-centric virtual tokens.
+        </p>
+      </div>
+    </section>
+
+    <!-- Content Sections -->
+    <section class="section">
+      <div class="container" style="max-width: 980px;">
+
+        <!-- 1. The Problem of Traditional Physical Queues -->
+        <div id="problem" class="card" style="margin-bottom: 36px; padding: 38px;">
+          <div class="section-kicker">The Traditional Bottleneck</div>
+          <h2 style="margin-bottom: 16px;">1. The Problem of Traditional Physical Queues</h2>
+          <p style="margin-bottom: 20px; line-height: 1.7;">
+            In traditional university administrations, campus cafeterias, bank counters, and healthcare clinics, service delivery relies on physical queues where individuals must stand or sit in crowded waiting areas. This model introduces severe inefficiencies:
+          </p>
+
+          <div class="grid grid-2 gap-6" style="margin-top: 20px;">
+            <div style="background: var(--color-bg-subtle); padding: 22px; border-radius: var(--radius-md); border: 1px solid var(--color-border-light);">
+              <h4 style="color: var(--status-danger); margin-bottom: 6px;">❌ Lost Productivity & Fatigue</h4>
+              <p style="font-size: 0.885rem; line-height: 1.55;">
+                Students spend hours standing in hallways instead of attending study sessions, completing lab assignments, or resting.
+              </p>
+            </div>
+
+            <div style="background: var(--color-bg-subtle); padding: 22px; border-radius: var(--radius-md); border: 1px solid var(--color-border-light);">
+              <h4 style="color: var(--status-danger); margin-bottom: 6px;">❌ Hallway Congestion & Stress</h4>
+              <p style="font-size: 0.885rem; line-height: 1.55;">
+                Overcrowded waiting corridors create noise, ventilation challenges, and health risks, particularly during seasonal admissions.
+              </p>
+            </div>
+
+            <div style="background: var(--color-bg-subtle); padding: 22px; border-radius: var(--radius-md); border: 1px solid var(--color-border-light);">
+              <h4 style="color: var(--status-danger); margin-bottom: 6px;">❌ Opaque Wait Times</h4>
+              <p style="font-size: 0.885rem; line-height: 1.55;">
+                Visitors have no visibility into how long consultations take, leading to anxiety, frustration, and disputes over turns.
+              </p>
+            </div>
+
+            <div style="background: var(--color-bg-subtle); padding: 22px; border-radius: var(--radius-md); border: 1px solid var(--color-border-light);">
+              <h4 style="color: var(--status-danger); margin-bottom: 6px;">❌ Unbalanced Staff Workloads</h4>
+              <p style="font-size: 0.885rem; line-height: 1.55;">
+                Without central dispatch, one counter may be overwhelmed with 20 people while an adjacent desk sits temporarily idle.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Why Virtual Queues Are Essential -->
+        <div class="card" style="margin-bottom: 36px; padding: 38px; background: linear-gradient(135deg, #FFFFFF, var(--color-wheat-light));">
+          <div class="section-kicker">The Digital Solution</div>
+          <h2 style="margin-bottom: 16px;">2. Why Virtual Queues Are Essential</h2>
+          <p style="margin-bottom: 20px; line-height: 1.7;">
+            A virtual queue separates the <em>reservation of a place in line</em> from the <em>physical presence</em> of the individual. Rather than demanding that customers anchor themselves to a floor spot, QueueLess issues a digital token that holds their exact place:
+          </p>
+
+          <ul style="display: flex; flex-direction: column; gap: 14px; margin-top: 14px; font-size: 0.95rem;">
+            <li style="display: flex; gap: 12px; align-items: flex-start;">
+              <span style="color: var(--status-success); font-weight: 800; font-size: 1.1rem;">✓</span>
+              <div><strong>Fair Algorithmic FIFO Ordering:</strong> Tokens are assigned strictly in the order requested, preventing line-cutting and confusion.</div>
+            </li>
+            <li style="display: flex; gap: 12px; align-items: flex-start;">
+              <span style="color: var(--status-success); font-weight: 800; font-size: 1.1rem;">✓</span>
+              <div><strong>Freedom of Movement:</strong> Users can study in the library, drink coffee, or walk across campus while remaining in queue.</div>
+            </li>
+            <li style="display: flex; gap: 12px; align-items: flex-start;">
+              <span style="color: var(--status-success); font-weight: 800; font-size: 1.1rem;">✓</span>
+              <div><strong>Just-In-Time Arrival:</strong> Turn-approaching notifications alert users exactly when to walk to their designated counter window.</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 3. How QueueLess Improves the Experience -->
+        <div class="card" style="margin-bottom: 36px; padding: 38px;">
+          <div class="section-kicker">Stakeholder Benefits</div>
+          <h2 style="margin-bottom: 16px;">3. How QueueLess Improves the Experience</h2>
+
+          <div class="grid grid-3 gap-6" style="margin-top: 24px;">
+            <div style="border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 24px; background: #FFFFFF;">
+              <h3 style="font-size: 1.15rem; color: var(--color-salmon-pink); margin-bottom: 10px;">For Students & Customers</h3>
+              <ul style="font-size: 0.885rem; color: var(--color-text-muted); display: flex; flex-direction: column; gap: 9px;">
+                <li>• Instant virtual token generation</li>
+                <li>• Real-time queue position tracking</li>
+                <li>• Accurate waiting-time estimates</li>
+                <li>• Full audit history of past visits</li>
+              </ul>
+            </div>
+
+            <div style="border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 24px; background: #FFFFFF;">
+              <h3 style="font-size: 1.15rem; color: var(--color-fawn); margin-bottom: 10px;">For Desk Officers</h3>
+              <ul style="font-size: 0.885rem; color: var(--color-text-muted); display: flex; flex-direction: column; gap: 9px;">
+                <li>• Clear, calm terminal counter view</li>
+                <li>• One-click Next Token dispatching</li>
+                <li>• Re-queue capability for absent users</li>
+                <li>• Complete privacy during consultations</li>
+              </ul>
+            </div>
+
+            <div style="border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 24px; background: #FFFFFF;">
+              <h3 style="font-size: 1.15rem; color: var(--color-bole); margin-bottom: 10px;">For Administrators</h3>
+              <ul style="font-size: 0.885rem; color: var(--color-text-muted); display: flex; flex-direction: column; gap: 9px;">
+                <li>• Real-time throughput metrics</li>
+                <li>• Peak-hour congestion monitoring</li>
+                <li>• Dynamic counter load balancing</li>
+                <li>• Audit logs for staffing decisions</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Academic Architecture & Technology Stack -->
+        <div id="architecture" class="card" style="margin-bottom: 36px; padding: 38px;">
+          <div class="section-kicker">Syllabus Compliance</div>
+          <h2 style="margin-bottom: 16px;">4. Academic Web Application Development (WAD) Architecture</h2>
+          <p style="margin-bottom: 20px; line-height: 1.7;">
+            Per the academic requirements of the First-Year Engineering curriculum, QueueLess is implemented with <strong>zero external dependencies</strong> and strictly adheres to standard web principles:
+          </p>
+
+          <table class="custom-table" style="margin-top: 16px;">
+            <thead>
+              <tr>
+                <th>Technology</th>
+                <th>Syllabus Topics Demonstrated</th>
+                <th>Role in QueueLess</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>HTML5</strong></td>
+                <td>Semantic tags, Forms (textboxes, selects, textareas), Tables, Lists, Modals</td>
+                <td>Structured document layouts for Landing Page and all 3 Dashboard views.</td>
+              </tr>
+              <tr>
+                <td><strong>CSS3</strong></td>
+                <td>CSS Custom Properties, Flexbox, Grid, Reset, Transitions, Bar Charts</td>
+                <td>Cohesive floral palette design system, responsive layouts, zero-dependency charts.</td>
+              </tr>
+              <tr>
+                <td><strong>Vanilla JavaScript</strong></td>
+                <td>DOM Manipulation, Event Listeners, Date & String Ops, Arrays, Loops, Form Validation</td>
+                <td>Live clock, dynamic service filtering, token turn simulation, and tab navigation.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 5. Future Scope & Roadmap -->
+        <div id="future-scope" class="card" style="padding: 38px; background: linear-gradient(135deg, #FFFFFF, var(--color-misty-rose-light)); border: 2px solid var(--color-misty-rose);">
+          <div class="section-kicker">Future Milestones</div>
+          <h2 style="margin-bottom: 16px;">5. Future Scope & Roadmap</h2>
+          <p style="margin-bottom: 20px; line-height: 1.7;">
+            While the current submission focuses strictly on the complete, responsive frontend interface, future full-stack integration phases will introduce:
+          </p>
+
+          <div class="grid grid-2 gap-4">
+            <div style="background: rgba(255, 255, 255, 0.85); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--color-border-light);">
+              <h4 style="color: var(--color-bole-dark); margin-bottom: 4px;">📡 Live WebSocket Synchronization</h4>
+              <p style="font-size: 0.865rem; color: var(--color-text-muted);">
+                Instant multi-screen updates between the customer's phone and the counter operator terminal.
+              </p>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.85); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--color-border-light);">
+              <h4 style="color: var(--color-bole-dark); margin-bottom: 4px;">📱 WhatsApp & SMS Webhooks</h4>
+              <p style="font-size: 0.865rem; color: var(--color-text-muted);">
+                Automated messaging dispatches sending text notifications when the student is 2 people away.
+              </p>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.85); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--color-border-light);">
+              <h4 style="color: var(--color-bole-dark); margin-bottom: 4px;">📺 Campus Lobby Digital Signage</h4>
+              <p style="font-size: 0.865rem; color: var(--color-text-muted);">
+                Full-screen kiosk and TV display modes with automated audio chimes for central waiting rooms.
+              </p>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.85); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--color-border-light);">
+              <h4 style="color: var(--color-bole-dark); margin-bottom: 4px;">🤖 Predictive Waiting Machine Learning</h4>
+              <p style="font-size: 0.865rem; color: var(--color-text-muted);">
+                Historical regression modeling accounting for time of day, desk officer handling speed, and inquiry complexity.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <img class="brand-logo-icon" src="./assets/QL-logo.png" alt="QueueLess" style="width: 28px; height: 28px">
+            <span>QueueLess</span>
+          </div>
+          <p class="footer-tagline">
+            Your Time Matters. Waiting Doesn't. Virtual queue management system built for College Web Application Development.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Platform</h4>
+          <ul class="footer-links">
+            <li><a href="./index.html" class="footer-link">Home</a></li>
+            <li><a href="./user-dashboard.html" class="footer-link">User Dashboard</a></li>
+            <li><a href="./provider-dashboard.html" class="footer-link">Provider Dashboard</a></li>
+            <li><a href="./intelligence.html" class="footer-link">AI Intelligence</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Sections</h4>
+          <ul class="footer-links">
+            <li><a href="#problem" class="footer-link">The Physical Queue Problem</a></li>
+            <li><a href="#architecture" class="footer-link">WAD Architecture</a></li>
+            <li><a href="#future-scope" class="footer-link">Future Scope</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Quick Actions</h4>
+          <ul class="footer-links">
+            <li><a href="./user-dashboard.html" class="footer-link">Join Virtual Queue</a></li>
+            <li><a href="./provider-dashboard.html" class="footer-link">Open Desk Terminal</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 QueueLess Virtual Queue Systems. Built for College Web Application Development examination.</div>
+        <div>Strictly Pure HTML5 & CSS3 Architecture (Zero JavaScript)</div>
+      </div>
+    </div>
+  </footer>
+  <script type="module" src="./js/api.js"></script>
+  <script type="module" src="./js/script.js"></script>
+</body>
+</html>

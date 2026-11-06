@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Portal — QueueLess</title>
+  <meta name="description" content="QueueLess Student and Customer Virtual Queue Dashboard. Track active tokens, monitor queue position, and explore campus service counters." />
+
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- QueueLess External Stylesheets (Pure CSS Architecture) -->
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/dashboard.css" />
+</head>
+<body>
+
+  <!-- Pure CSS Mobile Sidebar Drawer Toggle & Radio Tabs -->
+  <input type="checkbox" id="mobile-sidebar-toggle" class="sidebar-toggle-checkbox" />
+  <input type="radio" name="user-tab" id="tab-user-overview" class="tab-radio" checked />
+  <input type="radio" name="user-tab" id="tab-user-explore" class="tab-radio" />
+  <input type="radio" name="user-tab" id="tab-user-active" class="tab-radio" />
+  <input type="radio" name="user-tab" id="tab-user-tracking" class="tab-radio" />
+  <input type="radio" name="user-tab" id="tab-user-history" class="tab-radio" />
+  <input type="radio" name="user-tab" id="tab-user-settings" class="tab-radio" />
+
+  <div class="dashboard-layout">
+    <!-- Backdrop for mobile sidebar drawer -->
+    <label for="mobile-sidebar-toggle" class="mobile-sidebar-backdrop"></label>
+
+    <!-- Dedicated Sidebar Navigation (Pure CSS Labels) -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="./index.html" class="brand-logo">
+          <img class="brand-logo-icon" src="./assets/QL-logo.png" alt="QueueLess">
+          <span>QueueLess</span>
+        </a>
+        <span class="sidebar-role-badge">Student / Customer Portal</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <label for="tab-user-overview" class="sidebar-tab-label nav-user-overview">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </span>
+          <span>Overview</span>
+        </label>
+
+        <label for="tab-user-explore" class="sidebar-tab-label nav-user-explore">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <span>Explore Services</span>
+        </label>
+
+        <label for="tab-user-active" class="sidebar-tab-label nav-user-active">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 15h0M2 9.5h20"/></svg>
+          </span>
+          <span>My Active Queue</span>
+        </label>
+
+        <label for="tab-user-tracking" class="sidebar-tab-label nav-user-tracking">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="none"/><polyline points="12 6 12 12 16 14"/></svg>
+          </span>
+          <span>Token Tracking</span>
+        </label>
+
+        <label for="tab-user-history" class="sidebar-tab-label nav-user-history">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </span>
+          <span>Queue History</span>
+        </label>
+
+        <label for="tab-user-settings" class="sidebar-tab-label nav-user-settings">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </span>
+          <span>Settings</span>
+        </label>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-switcher-title">Switch System Role</div>
+        <div class="sidebar-switcher-links">
+          <a href="./provider-dashboard.html" class="sidebar-switcher-link">
+            <span>Service Provider</span>
+            <span>&rarr;</span>
+          </a>
+          <a href="./intelligence.html" class="sidebar-switcher-link">
+            <span>AI Intelligence</span>
+            <span>&rarr;</span>
+          </a>
+          <a href="./index.html" class="sidebar-switcher-link">
+            <span>Landing Page</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <div class="dashboard-main">
+      <!-- Top Navigation Bar -->
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <label for="mobile-sidebar-toggle" class="mobile-menu-label">
+            ☰ Menu
+          </label>
+          <div class="topbar-heading-group">
+            <div class="topbar-breadcrumb">Customer Portal &nbsp;/&nbsp; <span class="topbar-active-page">Active Session</span></div>
+            <h2 class="topbar-title">Student Queue Manager</h2>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="topbar-system-indicator">
+            <span class="topbar-system-dot"></span>
+            <span>10:30 AM · Campus Synchronized</span>
+          </div>
+
+          <div class="user-profile-badge">
+            <div class="user-avatar">AM</div>
+            <div class="user-info">
+              <span class="user-name">Alex Morgan</span>
+              <span class="user-role">Student #2026-4091</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Viewport Content -->
+      <main class="dashboard-content">
+
+        <!-- ================================================================
+             TAB 1: OVERVIEW
+             ================================================================ -->
+        <div id="tab-overview" class="dashboard-tab-content panel-user-overview">
+          <div style="margin-bottom: 24px;">
+            <h1 style="font-size: 1.85rem; margin-bottom: 6px;">Welcome back, Alex!</h1>
+            <p>You have 1 active virtual queue token for <strong>College Administration Office</strong>.</p>
+          </div>
+
+          <!-- Statistic Cards -->
+          <div class="stats-grid">
+            <div class="stat-card stat-pink">
+              <span class="stat-title">Active Token</span>
+              <span class="stat-number tabular-nums">QL-104</span>
+              <span class="stat-subtext">Service: College Admin</span>
+            </div>
+
+            <div class="stat-card stat-fawn">
+              <span class="stat-title">Queue Position</span>
+              <span class="stat-number tabular-nums">#3 in line</span>
+              <span class="stat-subtext">3 people ahead</span>
+            </div>
+
+            <div class="stat-card stat-wheat">
+              <span class="stat-title">Estimated Wait</span>
+              <span class="stat-number tabular-nums">~14 mins</span>
+              <span class="stat-subtext">Based on Counter 02 rate</span>
+            </div>
+
+            <div class="stat-card stat-neutral">
+              <span class="stat-title">Assigned Desk</span>
+              <span class="stat-number">Counter 02</span>
+              <span class="stat-subtext">Room 104, West Wing</span>
+            </div>
+          </div>
+
+          <!-- Active Token Highlight Banner -->
+          <div class="card" style="margin-bottom: 28px; border-left: 4px solid var(--color-salmon-pink);">
+            <div class="card-header">
+              <div>
+                <span class="badge badge-pink" style="margin-bottom: 6px;"><span class="badge-dot"></span>In Virtual Queue</span>
+                <span class="card-title">Token QL-104 — College Administration Office</span>
+                <div class="card-subtitle">Document Verification & Bonafide Certificate</div>
+              </div>
+              <label for="tab-user-tracking" class="btn btn-primary btn-sm">
+                Open Prominent Tracker &rarr;
+              </label>
+            </div>
+
+            <div class="grid grid-3 gap-4" style="margin: 18px 0; padding: 16px; background: var(--color-bg); border-radius: var(--radius-md);">
+              <div>
+                <span style="font-size: 0.75rem; color: var(--color-text-muted); display: block; text-transform: uppercase;">Current Serving</span>
+                <strong class="tabular-nums" style="color: var(--color-bole-dark); font-size: 1.05rem;">QL-101 (Counter 02)</strong>
+              </div>
+              <div>
+                <span style="font-size: 0.75rem; color: var(--color-text-muted); display: block; text-transform: uppercase;">Expected Window</span>
+                <strong style="color: var(--color-bole-dark); font-size: 1.05rem;">10:35 AM – 10:40 AM</strong>
+              </div>
+              <div>
+                <span style="font-size: 0.75rem; color: var(--color-text-muted); display: block; text-transform: uppercase;">Location</span>
+                <strong style="color: var(--color-bole-dark); font-size: 1.05rem;">Main Building, Room 102</strong>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; align-items: center; justify-content: flex-end;">
+              <label for="tab-user-active" class="btn btn-outline btn-sm">
+                View Desk Instructions
+              </label>
+              <label for="tab-user-tracking" class="btn btn-primary btn-sm">
+                Live Token Progress &rarr;
+              </label>
+            </div>
+          </div>
+
+          <!-- Frequently Visited Services -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <span class="card-title">Frequently Visited Campus Desks</span>
+                <div class="card-subtitle">Quick access to counters you frequently consult</div>
+              </div>
+              <label for="tab-user-explore" class="btn btn-outline btn-sm">
+                View All Desks
+              </label>
+            </div>
+
+            <div class="grid grid-3 gap-4">
+              <div style="padding: 16px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-wheat-subtle);">
+                <h4 style="font-size: 1rem; margin-bottom: 4px;">Library Help Desk</h4>
+                <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 12px;">Average wait: ~5 mins · Fast moving</p>
+                <label for="tab-user-explore" class="btn btn-secondary btn-sm w-full">
+                  Explore Counter
+                </label>
+              </div>
+
+              <div style="padding: 16px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-wheat-subtle);">
+                <h4 style="font-size: 1rem; margin-bottom: 4px;">Campus Cafeteria</h4>
+                <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 12px;">Average wait: ~12 mins · 9 waiting</p>
+                <label for="tab-user-explore" class="btn btn-secondary btn-sm w-full">
+                  Explore Counter
+                </label>
+              </div>
+
+              <div style="padding: 16px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-wheat-subtle);">
+                <h4 style="font-size: 1rem; margin-bottom: 4px;">Medical Centre</h4>
+                <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 12px;">Average wait: ~8 mins · 3 waiting</p>
+                <label for="tab-user-explore" class="btn btn-secondary btn-sm w-full">
+                  Explore Counter
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             TAB 2: EXPLORE SERVICES
+             ================================================================ -->
+        <div id="tab-explore" class="dashboard-tab-content panel-user-explore">
+          <div style="margin-bottom: 24px;">
+            <h1 style="font-size: 1.85rem; margin-bottom: 6px;">Explore Campus Services</h1>
+            <p>Browse active department desks, monitor queue lengths in real time, and join virtually.</p>
+          </div>
+
+          <!-- Search & Filter Controls Toolbar -->
+          <div class="search-filter-bar">
+            <div class="search-input-group">
+              <span class="search-icon-inside">
+                <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </span>
+              <input type="text" class="form-control" placeholder="Filter by desk name, department, or keyword..." />
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+              <div class="category-select-group">
+                <select class="form-control">
+                  <option value="all">All Departments</option>
+                  <option value="Admin">Academic & Admin</option>
+                  <option value="Library">Library</option>
+                  <option value="Dining">Dining</option>
+                  <option value="Health">Health</option>
+                  <option value="Financial">Financial</option>
+                </select>
+              </div>
+
+              <button type="button" class="btn btn-outline btn-sm">
+                Reset
+              </button>
+            </div>
+          </div>
+
+          <!-- Services Grid (Pure HTML5 & CSS3 Templates for Teammate 1) -->
+          <div class="grid grid-3 gap-6">
+            <!-- Service 1 -->
+            <div class="card service-card">
+              <div class="card-header">
+                <span class="badge badge-warning"><span class="badge-dot"></span>Moderate Traffic</span>
+                <span style="font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase;">Room 102</span>
+              </div>
+              <h3 style="font-size: 1.15rem; margin: 8px 0 4px 0;">College Administration Office</h3>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 16px;">
+                Bonafide certificates, transcripts, official attestations, and enrollment letters.
+              </p>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px; background: var(--color-bg); border-radius: var(--radius-md); margin-bottom: 16px;">
+                <div>
+                  <span style="font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase;">In Line</span>
+                  <div class="tabular-nums" style="font-size: 1.1rem; font-weight: 700; color: var(--color-bole-dark);">4 students</div>
+                </div>
+                <div>
+                  <span style="font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase;">Est. Wait</span>
+                  <div class="tabular-nums" style="font-size: 1.1rem; font-weight: 700; color: var(--color-salmon-pink);">~14 mins</div>
+                </div>
+              </div>
+              <label for="tab-user-tracking" class="btn btn-primary btn-sm w-full">
+                View Active Token (QL-104)
+              </label>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="card service-card">
+              <div class="card-header">
+                <span class="badge badge-success"><span class="badge-dot"></span>Fast Moving</span>
+                <span style="font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase;">Library 1F</span>
+              </div>
+              <h3 style="font-size: 1.15rem; margin: 8px 0 4px 0;">Library Help Desk</h3>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 16px;">
+                Book issues, overdue fine resolutions, reference assistance, and reading passes.
+              </p>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px; background: var(--color-bg); border-radius: var(--radius-md); margin-bottom: 16px;">
+                <div>
+                  <span style="font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase;">In Line</span>
+                  <div class="tabular-nums" style="font-size: 1.1rem; font-weight: 700; color: var(--color-bole-dark);">2 students</div>
+                </div>
+                <div>
+                  <span style="font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase;">Est. Wait</span>
+                  <div class="tabular-nums" style="font-size: 1.1rem; font-weight: 700; color: #27AE60;">~5 mins</div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm w-full">
+                Join Virtual Queue
+              </button>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="card service-card">
+              <div class="card-header">
+                <span class="badge badge-danger"><span class="badge-dot"></span>High Rush</span>
+                <span style="font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase;">Cafeteria</span>
+              </div>
+              <h3 style="font-size: 1.15rem; margin: 8px 0 4px 0;">Campus Cafeteria Express</h3>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 16px;">
+                Hot meal pickups, meal-plan card balance renewals, and special diet counters.
+              </p>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px; background: var(--color-bg); border-radius: var(--radius-md); margin-bottom: 16px;">
+                <div>
+                  <span style="font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase;">In Line</span>
+                  <div class="tabular-nums" style="font-size: 1.1rem; font-weight: 700; color: var(--color-bole-dark);">9 students</div>
+                </div>
+                <div>
+                  <span style="font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase;">Est. Wait</span>
+                  <div class="tabular-nums" style="font-size: 1.1rem; font-weight: 700; color: #E74C3C;">~12 mins</div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm w-full">
+                Join Virtual Queue
+              </button>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="card service-card">
+              <div class="card-header">
+                <span class="badge badge-success"><span class="badge-dot"></span>Low Traffic</span>
+                <span style="font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase;">Health Wing</span>
+              </div>
+              <h3 style="font-size: 1.15rem; margin: 8px 0 4px 0;">Medical Centre & Clinic</h3>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 16px;">
+                First-aid consultation, physician checkup, health form signing, and pharmacy dispense.
+              </p>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px; background: var(--color-bg); border-radius: var(--radius-md); margin-bottom: 16px;">
+                <div>
+                  <span style="font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase;">In Line</span>
+                  <div class="tabular-nums" style="font-size: 1.1rem; font-weight: 700; color: var(--color-bole-dark);">3 students</div>
+                </div>
+                <div>
+                  <span style="font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase;">Est. Wait</span>
+                  <div class="tabular-nums" style="font-size: 1.1rem; font-weight: 700; color: #27AE60;">~8 mins</div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm w-full">
+                Join Virtual Queue
+              </button>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="card service-card">
+              <div class="card-header">
+                <span class="badge badge-success"><span class="badge-dot"></span>Fast Moving</span>
+                <span style="font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase;">Lab 3</span>
+              </div>
+              <h3 style="font-size: 1.15rem; margin: 8px 0 4px 0;">IT Helpdesk & Wi-Fi Desk</h3>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 16px;">
+                Campus Wi-Fi registration, student email password reset, and lab server credentials.
+              </p>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px; background: var(--color-bg); border-radius: var(--radius-md); margin-bottom: 16px;">
+                <div>
+                  <span style="font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase;">In Line</span>
+                  <div class="tabular-nums" style="font-size: 1.1rem; font-weight: 700; color: var(--color-bole-dark);">1 student</div>
+                </div>
+                <div>
+                  <span style="font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase;">Est. Wait</span>
+                  <div class="tabular-nums" style="font-size: 1.1rem; font-weight: 700; color: #27AE60;">~4 mins</div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm w-full">
+                Join Virtual Queue
+              </button>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="card service-card">
+              <div class="card-header">
+                <span class="badge badge-warning"><span class="badge-dot"></span>Moderate</span>
+                <span style="font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase;">Admin Bld.</span>
+              </div>
+              <h3 style="font-size: 1.15rem; margin: 8px 0 4px 0;">Accounts & Fee Counter</h3>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 16px;">
+                Semester fee receipts, scholarship disbursements, exam fee payment clearance.
+              </p>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px; background: var(--color-bg); border-radius: var(--radius-md); margin-bottom: 16px;">
+                <div>
+                  <span style="font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase;">In Line</span>
+                  <div class="tabular-nums" style="font-size: 1.1rem; font-weight: 700; color: var(--color-bole-dark);">7 students</div>
+                </div>
+                <div>
+                  <span style="font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase;">Est. Wait</span>
+                  <div class="tabular-nums" style="font-size: 1.1rem; font-weight: 700; color: #E67E22;">~18 mins</div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm w-full">
+                Join Virtual Queue
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             TAB 3: MY ACTIVE QUEUE
+             ================================================================ -->
+        <div id="tab-active-queue" class="dashboard-tab-content panel-user-active">
+          <div style="margin-bottom: 24px;">
+            <h1 style="font-size: 1.85rem; margin-bottom: 6px;">My Active Queue</h1>
+            <p>Manage your current position, review counter instructions, or leave the line.</p>
+          </div>
+
+          <div class="card" style="margin-bottom: 28px;">
+            <div class="card-header">
+              <div>
+                <span class="card-title">
+                  <svg class="icon-svg" style="color: var(--color-salmon-pink);" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 15h0M2 9.5h20"/></svg>
+                  Current Queue Details
+                </span>
+                <div class="card-subtitle">Synchronized with Central Counter Dispatch</div>
+              </div>
+              <span class="badge badge-pink"><span class="badge-dot"></span>Waiting</span>
+            </div>
+
+            <div class="grid grid-2 gap-8" style="margin-bottom: 24px;">
+              <div>
+                <table class="custom-table" style="border: 1px solid var(--color-border);">
+                  <tbody>
+                    <tr>
+                      <td style="font-weight: 700; width: 40%; background: var(--color-wheat-light);">Token Number</td>
+                      <td class="tabular-nums" style="font-size: 1.35rem; font-weight: 800; color: var(--color-bole-dark);">QL-104</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; background: var(--color-wheat-light);">Service Desk</td>
+                      <td>College Administration Office</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; background: var(--color-wheat-light);">Queue Position</td>
+                      <td><strong class="tabular-nums" style="color: var(--color-salmon-pink); font-size: 1.1rem;">3</strong> people ahead of you</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; background: var(--color-wheat-light);">Estimated Wait</td>
+                      <td class="tabular-nums">~14 mins</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; background: var(--color-wheat-light);">Currently Serving</td>
+                      <td class="tabular-nums">QL-101</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; background: var(--color-wheat-light);">Assigned Counter</td>
+                      <td>Counter 02 (Room 104, West Wing)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div>
+                <div style="padding: 20px; border-radius: var(--radius-md); background: var(--color-bg); border: 1px solid var(--color-border); height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                  <div>
+                    <h4 style="font-size: 1.05rem; margin-bottom: 8px; color: var(--color-bole-dark);">Desk Instructions</h4>
+                    <ul style="padding-left: 20px; font-size: 0.885rem; color: var(--color-text-main); line-height: 1.6;">
+                      <li>Carry your original student ID card and fees receipt.</li>
+                      <li>For bonafide verification, keep 2 passport photographs ready.</li>
+                      <li>Arrive at Room 104 when 1 person remains ahead.</li>
+                    </ul>
+                  </div>
+
+                  <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--color-border);">
+                    <a href="#cancel-token-modal" class="btn btn-outline btn-sm" style="color: #E74C3C; border-color: #E74C3C;">
+                      Leave Queue
+                    </a>
+                    <label for="tab-user-tracking" class="btn btn-primary btn-sm">
+                      Full Screen Tracker &rarr;
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pure CSS Modal Dialog for Leaving Queue (:target) -->
+        <div id="cancel-token-modal" class="modal-dialog-overlay">
+          <div class="modal-dialog-card">
+            <a href="#" class="modal-dialog-close">&times;</a>
+            <h3 style="font-size: 1.25rem; margin-bottom: 8px;">Leave Queue Session?</h3>
+            <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 20px;">
+              Are you sure you want to surrender Token <strong>QL-104</strong>? If you cancel, your position will be forfeited and you must request a new token.
+            </p>
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+              <a href="#" class="btn btn-outline">Stay in Queue</a>
+              <a href="#" class="btn btn-primary" style="background-color: #E74C3C;">Confirm Cancellation</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             TAB 4: TOKEN TRACKING (PROMINENT CIRCULAR FEATURE INTERFACE)
+             ================================================================ -->
+        <div id="tab-token-tracking" class="dashboard-tab-content panel-user-tracking">
+          <div style="margin-bottom: 24px;">
+            <div class="section-kicker">Real-Time Virtual Turn Monitor</div>
+            <h1 style="font-size: 2.1rem; margin-bottom: 6px;">Live Token Tracking</h1>
+            <p>Monitor your token lifecycle, estimated time, and turn progression from anywhere on campus.</p>
+          </div>
+
+          <!-- Prominent Visual Hero Card with SVG Radial Progress Gauge -->
+          <div class="tracking-hero-card">
+            <div class="tracking-grid">
+              <div class="token-large-display">
+                <span style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-muted);">
+                  Active Digital Boarding Pass
+                </span>
+                <div class="token-hero-id tabular-nums">QL-104</div>
+                <div class="token-hero-service">College Administration Office</div>
+                <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-top: 4px;">
+                  Assigned Counter: <strong>Counter 02 (Room 104)</strong> · Officer: Dr. Sarah Vance
+                </p>
+
+                <div style="margin-top: 14px; display: flex; gap: 10px;">
+                  <span class="badge badge-success" style="padding: 6px 12px; font-size: 0.82rem;">
+                    <span class="badge-dot"></span> Active in Queue
+                  </span>
+                  <label for="tab-user-active" class="btn btn-outline btn-sm">
+                    Manage Position
+                  </label>
+                </div>
+              </div>
+
+              <!-- SVG Circular Progress Gauge Box -->
+              <div class="radial-gauge-container">
+                <div class="radial-svg-box">
+                  <svg viewBox="0 0 140 140" width="140" height="140" fill="none" style="width: 140px; height: 140px; max-width: 140px; max-height: 140px; display: block;" aria-label="Token progress gauge">
+                    <circle class="radial-circle-bg" cx="70" cy="70" r="60" fill="none" stroke="rgba(231, 174, 117, 0.25)" stroke-width="10" style="fill: none !important;" />
+                    <circle class="radial-circle-val" cx="70" cy="70" r="60" fill="none" stroke="var(--color-salmon-pink)" stroke-width="10" stroke-linecap="round" stroke-dasharray="377" stroke-dashoffset="170" transform="rotate(-90 70 70)" style="fill: none !important;" />
+                  </svg>
+                  <div class="radial-center-text">
+                    <span class="radial-pct tabular-nums">55%</span>
+                    <span class="radial-sub">Progress</span>
+                  </div>
+                </div>
+
+                <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-top: 12px; border-top: 1px solid var(--color-border-light);">
+                  <div>
+                    <span style="font-size: 0.725rem; color: var(--color-text-muted); text-transform: uppercase;">Ahead</span>
+                    <div class="tabular-nums" style="font-size: 1.4rem; font-weight: 800; color: var(--color-salmon-pink);">3</div>
+                  </div>
+                  <div>
+                    <span style="font-size: 0.725rem; color: var(--color-text-muted); text-transform: uppercase;">Wait</span>
+                    <div class="tabular-nums" style="font-size: 1.4rem; font-weight: 800; color: var(--color-bole-dark);">~14m</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stepper Progress Bar -->
+            <div class="timeline-stepper">
+              <div class="timeline-step completed">
+                <div class="step-node">✓</div>
+                <span class="step-label">Token Issued</span>
+                <span class="step-sub">10:15 AM</span>
+              </div>
+
+              <div class="timeline-step active">
+                <div class="step-node">2</div>
+                <span class="step-label">In Virtual Queue</span>
+                <span class="step-sub">Waiting Turn</span>
+              </div>
+
+              <div class="timeline-step">
+                <div class="step-node">3</div>
+                <span class="step-label">Turn Approaching</span>
+                <span class="step-sub">Head to Desk</span>
+              </div>
+
+              <div class="timeline-step">
+                <div class="step-node">4</div>
+                <span class="step-label">At Counter</span>
+                <span class="step-sub">Being Served</span>
+              </div>
+            </div>
+
+            <!-- Turn Guidance Box -->
+            <div class="sim-controls-card">
+              <div class="sim-info">
+                <div class="sim-info-icon">⚡</div>
+                <div>
+                  <span class="sim-title">Automated Turn Alerts Activated</span>
+                  <div class="sim-desc">You will receive an automated notification banner when 2 people remain ahead. No physical waiting needed!</div>
+                </div>
+              </div>
+              <label for="tab-user-active" class="btn btn-primary btn-sm">
+                View Room Directions &rarr;
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             TAB 5: QUEUE HISTORY
+             ================================================================ -->
+        <div id="tab-queue-history" class="dashboard-tab-content panel-user-history">
+          <div style="margin-bottom: 24px;">
+            <h1 style="font-size: 1.85rem; margin-bottom: 6px;">Queue History</h1>
+            <p>Audit trail of all your past campus token sessions and service durations.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Past Queue Records</span>
+              <span class="badge badge-neutral">9 Total Consultations</span>
+            </div>
+
+            <div class="table-wrapper">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Token ID</th>
+                    <th>Service Name</th>
+                    <th>Date</th>
+                    <th>Time Issued</th>
+                    <th>Actual Wait</th>
+                    <th>Counter</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="tabular-nums"><strong>QL-091</strong></td>
+                    <td>College Administration Office</td>
+                    <td>2026-10-24</td>
+                    <td class="tabular-nums">11:15 AM</td>
+                    <td class="tabular-nums">12 mins</td>
+                    <td>Counter C2</td>
+                    <td><span class="badge badge-success"><span class="badge-dot"></span>Completed</span></td>
+                  </tr>
+                  <tr>
+                    <td class="tabular-nums"><strong>LIB-043</strong></td>
+                    <td>Library Help Desk</td>
+                    <td>2026-10-22</td>
+                    <td class="tabular-nums">02:30 PM</td>
+                    <td class="tabular-nums">4 mins</td>
+                    <td>Counter L1</td>
+                    <td><span class="badge badge-success"><span class="badge-dot"></span>Completed</span></td>
+                  </tr>
+                  <tr>
+                    <td class="tabular-nums"><strong>MED-018</strong></td>
+                    <td>Medical Centre & Clinic</td>
+                    <td>2026-10-19</td>
+                    <td class="tabular-nums">09:45 AM</td>
+                    <td class="tabular-nums">7 mins</td>
+                    <td>Counter M1</td>
+                    <td><span class="badge badge-success"><span class="badge-dot"></span>Completed</span></td>
+                  </tr>
+                  <tr>
+                    <td class="tabular-nums"><strong>CAF-102</strong></td>
+                    <td>Campus Cafeteria Express</td>
+                    <td>2026-10-18</td>
+                    <td class="tabular-nums">01:10 PM</td>
+                    <td class="tabular-nums">—</td>
+                    <td>Counter C2</td>
+                    <td><span class="badge badge-danger"><span class="badge-dot"></span>Cancelled</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             TAB 6: SETTINGS
+             ================================================================ -->
+        <div id="tab-settings" class="dashboard-tab-content panel-user-settings">
+          <div style="margin-bottom: 24px;">
+            <h1 style="font-size: 1.85rem; margin-bottom: 6px;">Customer Settings</h1>
+            <p>Customize notifications, contact channels, and queue preferences.</p>
+          </div>
+
+          <div class="card" style="max-width: 680px;">
+            <div class="card-header">
+              <span class="card-title">Notification Preferences</span>
+              <span class="card-subtitle">Choose how QueueLess alerts you when your turn approaches</span>
+            </div>
+
+            <form action="#" method="get">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" value="Alex Morgan" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Student ID</label>
+                <input type="text" class="form-control" value="2026-4091" readonly style="background-color: var(--color-bg-subtle);" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Mobile Number for SMS Alerts</label>
+                <input type="tel" class="form-control" value="+1 (555) 234-5678" />
+                <span class="form-help">We send an automated SMS when you are next in line.</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Alert Advance Notice</label>
+                <select class="form-control">
+                  <option>Alert me when 2 people are ahead (Recommended)</option>
+                  <option>Alert me when 1 person is ahead</option>
+                  <option>Alert me 10 minutes before estimated turn</option>
+                </select>
+              </div>
+
+              <div style="margin-top: 24px; display: flex; justify-content: flex-end;">
+                <button type="submit" class="btn btn-primary">Save Preferences</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+  <script type="module" src="./js/api.js"></script>
+  <script type="module" src="./js/script.js"></script>
+  <script type="module" src="./js/user_dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Administration — QueueLess</title>
+  <meta name="description" content="QueueLess System Administration Console. Manage campus providers, user roles, system approval status, and database metrics." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- QueueLess External Stylesheets -->
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/dashboard.css" />
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <!-- Dedicated Sidebar Navigation -->
+    <aside class="sidebar" style="position: static; transform: none; box-shadow: none;">
+      <div class="sidebar-header">
+        <a href="./index.html" class="brand-logo">
+          <img class="brand-logo-icon" src="./assets/QL-logo.png" alt="QueueLess">
+          <span>QueueLess</span>
+        </a>
+        <span class="sidebar-role-badge" style="background-color: var(--color-misty-rose); color: var(--color-bole-dark);">
+          Super Admin
+        </span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#overview" class="sidebar-tab-label active" style="text-decoration: none; color: inherit;">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </span>
+          <span>System Overview</span>
+        </a>
+        <a href="#providers" class="sidebar-tab-label" style="text-decoration: none; color: inherit;">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </span>
+          <span>Provider Approvals</span>
+        </a>
+        <a href="#users" class="sidebar-tab-label" style="text-decoration: none; color: inherit;">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
+          </span>
+          <span>User Accounts</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-switcher-title">Switch System Role</div>
+        <div class="sidebar-switcher-links">
+          <a href="./student.html" class="sidebar-switcher-link">
+            <span>Student Portal</span>
+            <span>&rarr;</span>
+          </a>
+          <a href="./provider.html" class="sidebar-switcher-link">
+            <span>Provider Console</span>
+            <span>&rarr;</span>
+          </a>
+          <a href="./operator.html" class="sidebar-switcher-link">
+            <span>Operator Terminal</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <div class="topbar-heading-group">
+            <div class="topbar-breadcrumb">Administrative Console &nbsp;/&nbsp; <span class="topbar-active-page">System Management</span></div>
+            <h2 class="topbar-title">Central Administrative Portal</h2>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="topbar-system-indicator">
+            <span class="topbar-system-dot"></span>
+            <span>Database: queueless_db Connected</span>
+          </div>
+
+          <div class="user-profile-badge">
+            <div class="user-avatar" style="background: var(--color-bole-dark);">AD</div>
+            <div class="user-info">
+              <span class="user-name">System Administrator</span>
+              <span class="user-role">Super Admin</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-content">
+        <!-- System Metric Cards -->
+        <div class="stats-grid" style="margin-bottom: 24px;">
+          <div class="stat-card stat-fawn">
+            <span class="stat-label">Total Registered Users</span>
+            <div class="stat-number tabular-nums">542</div>
+            <span class="stat-meta">Across 4 System Roles</span>
+          </div>
+          <div class="stat-card stat-rose">
+            <span class="stat-label">Active Campus Providers</span>
+            <div class="stat-number tabular-nums">6</div>
+            <span class="stat-meta">1 Pending Verification</span>
+          </div>
+          <div class="stat-card stat-wheat">
+            <span class="stat-label">Daily Tokens Issued</span>
+            <div class="stat-number tabular-nums">232</div>
+            <span class="stat-meta">Current Active Today</span>
+          </div>
+          <div class="stat-card stat-fawn">
+            <span class="stat-label">Database Health</span>
+            <div class="stat-number" style="font-size: 1.4rem; color: #27AE60;">100% OK</div>
+            <span class="stat-meta">MySQL PDO Engine</span>
+          </div>
+        </div>
+
+        <!-- Provider Approvals Section -->
+        <div class="card" style="margin-bottom: 24px; padding: 24px; background: #FFFFFF; border-radius: 16px; border: 1px solid var(--color-border);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div>
+              <h3 style="font-size: 1.25rem; color: var(--color-bole-dark); margin: 0;">Campus Service Provider Approvals</h3>
+              <p style="margin: 4px 0 0 0; color: var(--color-text-muted); font-size: 0.88rem;">Review and verify service departments before they can open live queues.</p>
+            </div>
+            <span class="badge badge-warning">1 Pending Approval</span>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="custom-table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="text-align: left; border-bottom: 2px solid var(--color-border-light);">
+                  <th style="padding: 10px;">Organization / Dept</th>
+                  <th style="padding: 10px;">Location</th>
+                  <th style="padding: 10px;">Applicant</th>
+                  <th style="padding: 10px;">Status</th>
+                  <th style="padding: 10px; text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="admin-providers-tbody">
+                <tr>
+                  <td style="padding: 12px 10px;"><strong>West Campus Student Service Center</strong></td>
+                  <td style="padding: 12px 10px;">Room 104, West Wing</td>
+                  <td style="padding: 12px 10px;">Dr. Sarah Vance</td>
+                  <td style="padding: 12px 10px;"><span class="badge badge-success"><span class="badge-dot"></span>Approved</span></td>
+                  <td style="padding: 12px 10px; text-align: right;"><button type="button" class="btn btn-outline btn-sm" disabled>Approved</button></td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 10px;"><strong>Central Library Help Desk</strong></td>
+                  <td style="padding: 12px 10px;">Library Building, Ground Floor</td>
+                  <td style="padding: 12px 10px;">Head Librarian Sharma</td>
+                  <td style="padding: 12px 10px;"><span class="badge badge-success"><span class="badge-dot"></span>Approved</span></td>
+                  <td style="padding: 12px 10px; text-align: right;"><button type="button" class="btn btn-outline btn-sm" disabled>Approved</button></td>
+                </tr>
+                <tr id="row-pending-prov">
+                  <td style="padding: 12px 10px;"><strong>Hostel Allocation & Mess Committee</strong></td>
+                  <td style="padding: 12px 10px;">Kaveri Hostel Block B</td>
+                  <td style="padding: 12px 10px;">Warden Anita Rao</td>
+                  <td style="padding: 12px 10px;"><span class="badge badge-warning"><span class="badge-dot"></span>Pending Verification</span></td>
+                  <td style="padding: 12px 10px; text-align: right;">
+                    <div style="display: inline-flex; gap: 6px;">
+                      <button id="btn-approve-prov" type="button" class="btn btn-primary btn-sm">Approve</button>
+                      <button id="btn-reject-prov" type="button" class="btn btn-outline btn-sm">Reject</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- User Accounts Section -->
+        <div class="card" style="padding: 24px; background: #FFFFFF; border-radius: 16px; border: 1px solid var(--color-border);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 style="font-size: 1.25rem; color: var(--color-bole-dark); margin: 0;">User Account Directory</h3>
+            <span class="badge badge-neutral">5 Seed Accounts Configured</span>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="custom-table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="text-align: left; border-bottom: 2px solid var(--color-border-light);">
+                  <th style="padding: 10px;">ID</th>
+                  <th style="padding: 10px;">Full Name</th>
+                  <th style="padding: 10px;">Email</th>
+                  <th style="padding: 10px;">Role</th>
+                  <th style="padding: 10px;">Account Status</th>
+                  <th style="padding: 10px; text-align: right;">Toggle Status</th>
+                </tr>
+              </thead>
+              <tbody id="admin-users-tbody">
+                <tr>
+                  <td style="padding: 12px 10px;" class="tabular-nums">1</td>
+                  <td style="padding: 12px 10px;"><strong>System Administrator</strong></td>
+                  <td style="padding: 12px 10px;">admin@queueless.edu</td>
+                  <td style="padding: 12px 10px;"><span class="badge badge-neutral">Admin</span></td>
+                  <td style="padding: 12px 10px;"><span class="badge badge-success">Active</span></td>
+                  <td style="padding: 12px 10px; text-align: right;">—</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 10px;" class="tabular-nums">2</td>
+                  <td style="padding: 12px 10px;"><strong>West Campus Administration</strong></td>
+                  <td style="padding: 12px 10px;">provider@campus.edu</td>
+                  <td style="padding: 12px 10px;"><span class="badge badge-pink">Provider</span></td>
+                  <td style="padding: 12px 10px;"><span class="badge badge-success">Active</span></td>
+                  <td style="padding: 12px 10px; text-align: right;"><button type="button" class="btn btn-outline btn-sm">Suspend</button></td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 10px;" class="tabular-nums">3</td>
+                  <td style="padding: 12px 10px;"><strong>Alex Morgan</strong></td>
+                  <td style="padding: 12px 10px;">student@igdtuw.ac.in</td>
+                  <td style="padding: 12px 10px;"><span class="badge badge-neutral">Student</span></td>
+                  <td style="padding: 12px 10px;"><span class="badge badge-success">Active</span></td>
+                  <td style="padding: 12px 10px; text-align: right;"><button type="button" class="btn btn-outline btn-sm">Suspend</button></td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 10px;" class="tabular-nums">4</td>
+                  <td style="padding: 12px 10px;"><strong>Dr. Sarah Vance</strong></td>
+                  <td style="padding: 12px 10px;">sarah.vance@campus.edu</td>
+                  <td style="padding: 12px 10px;"><span class="badge badge-neutral">Operator</span></td>
+                  <td style="padding: 12px 10px;"><span class="badge badge-success">Active</span></td>
+                  <td style="padding: 12px 10px; text-align: right;"><button type="button" class="btn btn-outline btn-sm">Suspend</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="./js/api.js"></script>
+  <script type="module" src="./js/script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var btnApprove = document.getElementById("btn-approve-prov");
+      var btnReject = document.getElementById("btn-reject-prov");
+      var rowPending = document.getElementById("row-pending-prov");
+
+      if (btnApprove && rowPending) {
+        btnApprove.addEventListener("click", function () {
+          if (window.QueueLessAPI) {
+            window.QueueLessAPI.approveProvider(3, 'approved').catch(function(){});
+          }
+          rowPending.querySelector("td:nth-child(4)").innerHTML = '<span class="badge badge-success"><span class="badge-dot"></span>Approved</span>';
+          rowPending.querySelector("td:nth-child(5)").innerHTML = '<button type="button" class="btn btn-outline btn-sm" disabled>Approved</button>';
+          if (window.showQueueNotification) {
+            window.showQueueNotification("Hostel Allocation & Mess Committee approved successfully!", "success");
+          }
+        });
+      }
+
+      if (btnReject && rowPending) {
+        btnReject.addEventListener("click", function () {
+          if (window.QueueLessAPI) {
+            window.QueueLessAPI.approveProvider(3, 'rejected').catch(function(){});
+          }
+          rowPending.querySelector("td:nth-child(4)").innerHTML = '<span class="badge badge-neutral">Rejected</span>';
+          rowPending.querySelector("td:nth-child(5)").innerHTML = '<button type="button" class="btn btn-outline btn-sm" disabled>Rejected</button>';
+          if (window.showQueueNotification) {
+            window.showQueueNotification("Provider application rejected.", "info");
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service Desk Console — QueueLess</title>
+  <meta name="description" content="QueueLess Service Desk Administrator and Counter Operator Dashboard. Manage queues, operate counters, process tokens, and audit waiting times." />
+
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- QueueLess External Stylesheets (Pure CSS Architecture) -->
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/dashboard.css" />
+</head>
+<body>
+
+  <!-- Pure CSS Mobile Sidebar Drawer Toggle & Radio Tabs -->
+  <input type="checkbox" id="mobile-sidebar-toggle" class="sidebar-toggle-checkbox" />
+  <input type="radio" name="prov-tab" id="tab-prov-overview" class="tab-radio" checked />
+  <input type="radio" name="prov-tab" id="tab-prov-queues" class="tab-radio" />
+  <input type="radio" name="prov-tab" id="tab-prov-counters" class="tab-radio" />
+  <input type="radio" name="prov-tab" id="tab-prov-tokens" class="tab-radio" />
+  <input type="radio" name="prov-tab" id="tab-prov-analytics" class="tab-radio" />
+  <input type="radio" name="prov-tab" id="tab-prov-settings" class="tab-radio" />
+
+  <div class="dashboard-layout">
+    <!-- Backdrop for mobile drawer -->
+    <label for="mobile-sidebar-toggle" class="mobile-sidebar-backdrop"></label>
+
+    <!-- Dedicated Sidebar Navigation (Pure CSS Labels) -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="./index.html" class="brand-logo">
+          <img class="brand-logo-icon" src="./assets/QL-logo.png" alt="QueueLess">
+          <span>QueueLess</span>
+        </a>
+        <span class="sidebar-role-badge" style="background-color: var(--color-misty-rose); color: var(--color-bole-dark);">
+          Staff / Desk Admin
+        </span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <label for="tab-prov-overview" class="sidebar-tab-label nav-prov-overview">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </span>
+          <span>Overview</span>
+        </label>
+
+        <label for="tab-prov-queues" class="sidebar-tab-label nav-prov-queues">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          </span>
+          <span>Queue Management</span>
+        </label>
+
+        <label for="tab-prov-counters" class="sidebar-tab-label nav-prov-counters">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </span>
+          <span>Counters</span>
+        </label>
+
+        <label for="tab-prov-tokens" class="sidebar-tab-label nav-prov-tokens">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 15h0M2 9.5h20"/></svg>
+          </span>
+          <span>Token Management</span>
+        </label>
+
+        <label for="tab-prov-analytics" class="sidebar-tab-label nav-prov-analytics">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </span>
+          <span>Analytics</span>
+        </label>
+
+        <label for="tab-prov-settings" class="sidebar-tab-label nav-prov-settings">
+          <span class="sidebar-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </span>
+          <span>Settings</span>
+        </label>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-switcher-title">Switch System Role</div>
+        <div class="sidebar-switcher-links">
+          <a href="./user-dashboard.html" class="sidebar-switcher-link">
+            <span>Customer View</span>
+            <span>&rarr;</span>
+          </a>
+          <a href="./intelligence.html" class="sidebar-switcher-link">
+            <span>AI Intelligence</span>
+            <span>&rarr;</span>
+          </a>
+          <a href="./index.html" class="sidebar-switcher-link">
+            <span>Landing Page</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <div class="dashboard-main">
+      <!-- Top Navigation Bar -->
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <label for="mobile-sidebar-toggle" class="mobile-menu-label">
+            ☰ Menu
+          </label>
+          <div class="topbar-heading-group">
+            <div class="topbar-breadcrumb">Service Provider &nbsp;/&nbsp; <span class="topbar-active-page">Counter Operations</span></div>
+            <h2 class="topbar-title">West Campus Administrative Desk</h2>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="topbar-system-indicator">
+            <span class="topbar-system-dot"></span>
+            <span>10:30 AM · Campus Synchronized</span>
+          </div>
+
+          <div class="user-profile-badge">
+            <div class="user-avatar" style="background: var(--color-bole);">SV</div>
+            <div class="user-info">
+              <span class="user-name">Dr. Sarah Vance</span>
+              <span class="user-role">Chief Desk Officer</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Viewport Content -->
+      <main class="dashboard-content">
+
+        <!-- ================================================================
+             TAB 1: PROVIDER OVERVIEW
+             ================================================================ -->
+        <div id="tab-prov-overview" class="dashboard-tab-content panel-prov-overview">
+          <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h1 style="font-size: 1.85rem; margin-bottom: 6px;">Desk Operations Overview</h1>
+              <p>Live metrics across all 3 active counters at West Campus Service Center.</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <a href="#create-queue-modal" class="btn btn-primary btn-sm">
+                <svg class="icon-svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Create New Queue
+              </a>
+            </div>
+          </div>
+
+          <!-- Statistic Cards -->
+          <div class="stats-grid">
+            <div class="stat-card stat-fawn">
+              <span class="stat-title">Active Queues</span>
+              <span class="stat-number tabular-nums">4</span>
+              <span class="stat-subtext">Registered departments</span>
+            </div>
+
+            <div class="stat-card stat-pink">
+              <span class="stat-title">Open Counters</span>
+              <span class="stat-number tabular-nums">3 / 4</span>
+              <span class="stat-subtext">Desk operators active</span>
+            </div>
+
+            <div class="stat-card stat-wheat">
+              <span class="stat-title">Total In Queue</span>
+              <span class="stat-number tabular-nums">17</span>
+              <span class="stat-subtext">Across all service desks</span>
+            </div>
+
+            <div class="stat-card stat-neutral">
+              <span class="stat-title">Average Wait Time</span>
+              <span class="stat-number tabular-nums">9.8 mins</span>
+              <span class="stat-subtext">Within 12-min SLA target</span>
+            </div>
+          </div>
+
+          <!-- Real-Time Counter Operations Panel -->
+          <div class="card" style="margin-bottom: 28px;">
+            <div class="card-header">
+              <div>
+                <span class="card-title">Live Counter Terminal Status</span>
+                <div class="card-subtitle">Real-time status of all operator booths</div>
+              </div>
+              <label for="tab-prov-counters" class="btn btn-outline btn-sm">
+                Open Counter Console &rarr;
+              </label>
+            </div>
+
+            <div class="table-wrapper">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Counter</th>
+                    <th>Assigned Service</th>
+                    <th>Operator</th>
+                    <th>Current Token</th>
+                    <th>Students Waiting</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="tabular-nums"><strong>Counter 01</strong></td>
+                    <td>Admissions & Transfers</td>
+                    <td>Officer Mark Ramos</td>
+                    <td class="tabular-nums"><strong style="color: var(--color-salmon-pink); font-size: 1.1rem;">ADM-088</strong></td>
+                    <td class="tabular-nums">3 students</td>
+                    <td><span class="badge badge-success"><span class="badge-dot"></span>Serving</span></td>
+                    <td>
+                      <button type="button" class="btn btn-outline btn-sm">Call Next</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="tabular-nums"><strong>Counter 02</strong></td>
+                    <td>College Administration (Dean Office)</td>
+                    <td>Dr. Sarah Vance</td>
+                    <td class="tabular-nums"><strong style="color: var(--color-salmon-pink); font-size: 1.1rem;">QL-102</strong></td>
+                    <td class="tabular-nums">4 students</td>
+                    <td><span class="badge badge-success"><span class="badge-dot"></span>Serving</span></td>
+                    <td>
+                      <button type="button" class="btn btn-outline btn-sm">Call Next</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="tabular-nums"><strong>Counter 03</strong></td>
+                    <td>Scholarships & Financial Aid</td>
+                    <td>Assistant Priya Nair</td>
+                    <td class="tabular-nums" style="color: var(--color-text-muted);">—</td>
+                    <td class="tabular-nums">2 students</td>
+                    <td><span class="badge badge-neutral"><span class="badge-dot"></span>Available / Idle</span></td>
+                    <td>
+                      <button type="button" class="btn btn-primary btn-sm">Open First Token</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             TAB 2: QUEUE MANAGEMENT
+             ================================================================ -->
+        <div id="tab-prov-queues" class="dashboard-tab-content panel-prov-queues">
+          <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h1 style="font-size: 1.85rem; margin-bottom: 6px;">Queue Management</h1>
+              <p>Configure departmental queues, assign counter windows, and monitor active service lines.</p>
+            </div>
+            <a href="#create-queue-modal" class="btn btn-primary btn-sm">
+              <svg class="icon-svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Create New Queue
+            </a>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Configured Department Queues</span>
+              <span class="badge badge-neutral">4 Registered Queues</span>
+            </div>
+
+            <div class="table-wrapper">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Queue Name</th>
+                    <th>Department</th>
+                    <th>Counters</th>
+                    <th>Current Serving</th>
+                    <th>In Queue</th>
+                    <th>Avg Wait</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>College Administration Office</strong></td>
+                    <td>Academic & Admin</td>
+                    <td class="tabular-nums">Counter 02</td>
+                    <td class="tabular-nums">QL-102</td>
+                    <td class="tabular-nums">4 students</td>
+                    <td class="tabular-nums">14 mins</td>
+                    <td><span class="badge badge-success"><span class="badge-dot"></span>Active</span></td>
+                    <td>
+                      <label for="tab-prov-counters" class="btn btn-outline btn-sm">Manage</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Library Help Desk</strong></td>
+                    <td>Library Circulation</td>
+                    <td class="tabular-nums">Counter 01</td>
+                    <td class="tabular-nums">LIB-048</td>
+                    <td class="tabular-nums">2 students</td>
+                    <td class="tabular-nums">5 mins</td>
+                    <td><span class="badge badge-success"><span class="badge-dot"></span>Active</span></td>
+                    <td>
+                      <label for="tab-prov-counters" class="btn btn-outline btn-sm">Manage</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Campus Cafeteria Express</strong></td>
+                    <td>Student Dining</td>
+                    <td class="tabular-nums">Counter 04</td>
+                    <td class="tabular-nums">CAF-110</td>
+                    <td class="tabular-nums">9 students</td>
+                    <td class="tabular-nums">12 mins</td>
+                    <td><span class="badge badge-warning"><span class="badge-dot"></span>High Rush</span></td>
+                    <td>
+                      <label for="tab-prov-counters" class="btn btn-outline btn-sm">Manage</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Medical Centre & Clinic</strong></td>
+                    <td>Campus Health</td>
+                    <td class="tabular-nums">Counter 05</td>
+                    <td class="tabular-nums">MED-022</td>
+                    <td class="tabular-nums">3 students</td>
+                    <td class="tabular-nums">8 mins</td>
+                    <td><span class="badge badge-success"><span class="badge-dot"></span>Active</span></td>
+                    <td>
+                      <label for="tab-prov-counters" class="btn btn-outline btn-sm">Manage</label>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             TAB 3: COUNTERS
+             ================================================================ -->
+        <div id="tab-prov-counters" class="dashboard-tab-content panel-prov-counters">
+          <div style="margin-bottom: 24px;">
+            <h1 style="font-size: 1.85rem; margin-bottom: 6px;">Counter Operations Terminal</h1>
+            <p>Direct terminal view for desk officers. Call next customers, mark handling complete, or place desks on hold.</p>
+          </div>
+
+          <div class="counter-grid">
+            <!-- Counter 01 Card -->
+            <div class="counter-card active">
+              <div class="counter-header">
+                <div>
+                  <h3 class="counter-number">Counter 01</h3>
+                  <span style="font-size: 0.775rem; color: var(--color-text-muted);">Admissions & Transfers</span>
+                </div>
+                <span class="badge badge-success"><span class="badge-dot"></span>Serving</span>
+              </div>
+
+              <div class="counter-token-display">
+                <div class="counter-token-label">Currently Serving</div>
+                <div class="counter-token-number tabular-nums">ADM-088</div>
+                <span style="font-size: 0.8rem; color: var(--color-text-muted);">Student John Peterson</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 16px; padding: 0 4px;">
+                <span>Officer: <strong>Mark Ramos</strong></span>
+                <span>Queue: <strong class="tabular-nums">3 waiting</strong></span>
+              </div>
+
+              <div class="counter-actions">
+                <button type="button" class="btn btn-primary btn-sm">Call Next</button>
+                <button type="button" class="btn btn-outline btn-sm">Complete</button>
+              </div>
+            </div>
+
+            <!-- Counter 02 Card -->
+            <div class="counter-card active">
+              <div class="counter-header">
+                <div>
+                  <h3 class="counter-number">Counter 02</h3>
+                  <span style="font-size: 0.775rem; color: var(--color-text-muted);">College Administration</span>
+                </div>
+                <span class="badge badge-success"><span class="badge-dot"></span>Serving</span>
+              </div>
+
+              <div class="counter-token-display">
+                <div class="counter-token-label">Currently Serving</div>
+                <div class="counter-token-number tabular-nums">QL-102</div>
+                <span style="font-size: 0.8rem; color: var(--color-text-muted);">Student Brenda Smith</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 16px; padding: 0 4px;">
+                <span>Officer: <strong>Dr. Sarah Vance</strong></span>
+                <span>Queue: <strong class="tabular-nums">4 waiting</strong></span>
+              </div>
+
+              <div class="counter-actions">
+                <button type="button" class="btn btn-primary btn-sm">Call Next</button>
+                <button type="button" class="btn btn-outline btn-sm">Complete</button>
+              </div>
+            </div>
+
+            <!-- Counter 03 Card -->
+            <div class="counter-card paused">
+              <div class="counter-header">
+                <div>
+                  <h3 class="counter-number">Counter 03</h3>
+                  <span style="font-size: 0.775rem; color: var(--color-text-muted);">Scholarship & Accounts</span>
+                </div>
+                <span class="badge badge-neutral"><span class="badge-dot"></span>Available</span>
+              </div>
+
+              <div class="counter-token-display" style="border-style: dashed;">
+                <div class="counter-token-label">Currently Serving</div>
+                <div class="counter-token-number tabular-nums" style="color: var(--color-text-muted);">—</div>
+                <span style="font-size: 0.8rem; color: var(--color-text-muted);">Desk Ready for Next</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 16px; padding: 0 4px;">
+                <span>Officer: <strong>Priya Nair</strong></span>
+                <span>Queue: <strong class="tabular-nums">2 waiting</strong></span>
+              </div>
+
+              <div class="counter-actions">
+                <button type="button" class="btn btn-primary btn-sm">Call First Token</button>
+                <button type="button" class="btn btn-outline btn-sm">Standby</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             TAB 4: TOKEN MANAGEMENT
+             ================================================================ -->
+        <div id="tab-prov-tokens" class="dashboard-tab-content panel-prov-tokens">
+          <div style="margin-bottom: 24px;">
+            <h1 style="font-size: 1.85rem; margin-bottom: 6px;">Live Token Processing</h1>
+            <p>Operate active ticket dispatch, handle customer skips, and mark sessions completed.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">
+                <svg class="icon-svg" style="color: var(--color-salmon-pink);" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 15h0M2 9.5h20"/></svg>
+                Active Queue Roster
+              </span>
+              <span class="badge badge-pink">4 Students in Line</span>
+            </div>
+
+            <div class="table-wrapper">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Token ID</th>
+                    <th>Customer Name</th>
+                    <th>Issue Reason</th>
+                    <th>Issued At</th>
+                    <th>Wait Duration</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="background: rgba(39, 174, 96, 0.05);">
+                    <td class="tabular-nums"><strong style="color: #27AE60; font-size: 1.15rem;">QL-102</strong></td>
+                    <td><strong>Brenda Smith</strong></td>
+                    <td>Bonafide Certificate Sign</td>
+                    <td class="tabular-nums">10:05 AM</td>
+                    <td class="tabular-nums">Served (4m)</td>
+                    <td><span class="badge badge-success"><span class="badge-dot"></span>At Counter 02</span></td>
+                    <td>
+                      <button type="button" class="btn btn-outline btn-sm">Mark Complete</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="tabular-nums"><strong style="color: var(--color-bole-dark);">QL-103</strong></td>
+                    <td>Marcus Chen</td>
+                    <td>Transcript Attestation</td>
+                    <td class="tabular-nums">10:12 AM</td>
+                    <td class="tabular-nums">18 mins</td>
+                    <td><span class="badge badge-warning"><span class="badge-dot"></span>Next in Line</span></td>
+                    <td>
+                      <div style="display: flex; gap: 6px;">
+                        <button type="button" class="btn btn-primary btn-sm">Call Now</button>
+                        <button type="button" class="btn btn-outline btn-sm">Skip</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="tabular-nums"><strong style="color: var(--color-salmon-pink);">QL-104</strong></td>
+                    <td>Alex Morgan</td>
+                    <td>Document Verification</td>
+                    <td class="tabular-nums">10:15 AM</td>
+                    <td class="tabular-nums">15 mins</td>
+                    <td><span class="badge badge-pink"><span class="badge-dot"></span>Waiting (#2)</span></td>
+                    <td>
+                      <button type="button" class="btn btn-outline btn-sm">Recall</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="tabular-nums"><strong style="color: var(--color-bole-dark);">QL-105</strong></td>
+                    <td>David Miller</td>
+                    <td>Grade Card Reprint</td>
+                    <td class="tabular-nums">10:20 AM</td>
+                    <td class="tabular-nums">10 mins</td>
+                    <td><span class="badge badge-pink"><span class="badge-dot"></span>Waiting (#3)</span></td>
+                    <td>
+                      <button type="button" class="btn btn-outline btn-sm">Recall</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             TAB 5: ANALYTICS (PURE CSS / HTML AS PER SYLLABUS)
+             ================================================================ -->
+        <div id="tab-prov-analytics" class="dashboard-tab-content panel-prov-analytics">
+          <div style="margin-bottom: 24px;">
+            <h1 style="font-size: 1.85rem; margin-bottom: 6px;">Service Desk Analytics</h1>
+            <p>Historical throughput, hourly traffic distribution, and counter efficiency.</p>
+          </div>
+
+          <!-- Pure CSS Bar Chart for Hourly Token Volume -->
+          <div class="card" style="margin-bottom: 28px;">
+            <div class="card-header">
+              <div>
+                <span class="card-title">Hourly Token Volume Distribution (CSS Flexbox Chart)</span>
+                <div class="card-subtitle">Tokens processed between 09:00 AM and 05:00 PM today</div>
+              </div>
+              <span class="badge badge-neutral">Peak: 11 AM – 12 PM</span>
+            </div>
+
+            <div class="css-bar-chart">
+              <div class="css-chart-column">
+                <div class="css-chart-bar" style="height: 35%;">
+                  <span class="css-chart-bar-tooltip">14 tokens</span>
+                </div>
+                <span class="css-chart-label">09 AM</span>
+              </div>
+              <div class="css-chart-column">
+                <div class="css-chart-bar" style="height: 65%;">
+                  <span class="css-chart-bar-tooltip">26 tokens</span>
+                </div>
+                <span class="css-chart-label">10 AM</span>
+              </div>
+              <div class="css-chart-column">
+                <div class="css-chart-bar rush-peak" style="height: 95%;">
+                  <span class="css-chart-bar-tooltip">38 tokens</span>
+                </div>
+                <span class="css-chart-label">11 AM</span>
+              </div>
+              <div class="css-chart-column">
+                <div class="css-chart-bar" style="height: 50%;">
+                  <span class="css-chart-bar-tooltip">20 tokens</span>
+                </div>
+                <span class="css-chart-label">12 PM</span>
+              </div>
+              <div class="css-chart-column">
+                <div class="css-chart-bar" style="height: 40%;">
+                  <span class="css-chart-bar-tooltip">16 tokens</span>
+                </div>
+                <span class="css-chart-label">01 PM</span>
+              </div>
+              <div class="css-chart-column">
+                <div class="css-chart-bar" style="height: 70%;">
+                  <span class="css-chart-bar-tooltip">28 tokens</span>
+                </div>
+                <span class="css-chart-label">02 PM</span>
+              </div>
+              <div class="css-chart-column">
+                <div class="css-chart-bar" style="height: 45%;">
+                  <span class="css-chart-bar-tooltip">18 tokens</span>
+                </div>
+                <span class="css-chart-label">03 PM</span>
+              </div>
+              <div class="css-chart-column">
+                <div class="css-chart-bar" style="height: 25%;">
+                  <span class="css-chart-bar-tooltip">10 tokens</span>
+                </div>
+                <span class="css-chart-label">04 PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             TAB 6: PROVIDER SETTINGS
+             ================================================================ -->
+        <div id="tab-prov-settings" class="dashboard-tab-content panel-prov-settings">
+          <div style="margin-bottom: 24px;">
+            <h1 style="font-size: 1.85rem; margin-bottom: 6px;">Provider Console Settings</h1>
+            <p>Operational hours, max queue capacities, and counter window assignments.</p>
+          </div>
+
+          <div class="card" style="max-width: 680px;">
+            <div class="card-header">
+              <span class="card-title">Desk Configuration</span>
+              <span class="card-subtitle">Adjust settings for West Campus Administrative Center</span>
+            </div>
+
+            <form action="#" method="get">
+              <div class="form-group">
+                <label class="form-label">Service Desk Name</label>
+                <input type="text" class="form-control" value="West Campus Administration Office" />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Opening Time</label>
+                  <input type="time" class="form-control" value="09:00" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Closing Time</label>
+                  <input type="time" class="form-control" value="17:00" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Maximum Tokens Per Hour</label>
+                <input type="number" class="form-control" value="40" min="10" max="100" />
+                <span class="form-help">Prevents overwhelming counter staff during examination periods.</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Auto-Recall Window for Skipped Tokens</label>
+                <select class="form-control">
+                  <option>Place skipped tokens behind 3 upcoming customers</option>
+                  <option>Place skipped tokens at end of queue</option>
+                  <option>Require manual staff recall</option>
+                </select>
+              </div>
+
+              <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 10px;">
+                <button type="submit" class="btn btn-primary">Update Settings</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Create New Queue Modal (Pure CSS :target) -->
+  <div id="create-queue-modal" class="modal-dialog-overlay">
+    <div class="modal-dialog-card">
+      <a href="#" class="modal-dialog-close">&times;</a>
+      <h3 style="font-size: 1.25rem; margin-bottom: 8px;">Create New Service Queue</h3>
+      <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 20px;">
+        Add a new virtual line for your campus department or counter window.
+      </p>
+
+      <form action="#" method="get">
+        <div class="form-group">
+          <label class="form-label" for="new-queue-name">Queue Service Name</label>
+          <input type="text" id="new-queue-name" class="form-control" placeholder="e.g. Identity Card Replacement Desk" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="new-queue-dept">Department</label>
+            <select id="new-queue-dept" class="form-control" required>
+              <option value="">Select Category</option>
+              <option value="Administration">Administration</option>
+              <option value="Academic">Academic</option>
+              <option value="Accounts">Accounts & Finance</option>
+              <option value="Student Affairs">Student Affairs</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="new-queue-counters">Assigned Counters</label>
+            <input type="number" id="new-queue-counters" class="form-control" value="1" min="1" max="5" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Estimated Service Handling (Minutes)</label>
+          <input type="number" class="form-control" value="10" min="2" max="60" />
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
+          <a href="#" class="btn btn-outline">Cancel</a>
+          <button type="submit" class="btn btn-primary">Create Queue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="./js/api.js"></script>
+  <script type="module" src="./js/script.js"></script>
+  <script type="module" src="./js/provider_dashboard.js"></script>
+</body>
+</html>
