@@ -14,6 +14,7 @@ export default defineConfig({
         provider: path.resolve(__dirname, 'provider.html'),
         operator: path.resolve(__dirname, 'operator.html'),
         admin: path.resolve(__dirname, 'admin.html'),
+        signup: path.resolve(__dirname, 'signup.html'),
         userDashboard: path.resolve(__dirname, 'user-dashboard.html'),
         providerDashboard: path.resolve(__dirname, 'provider-dashboard.html'),
         intelligence: path.resolve(__dirname, 'intelligence.html'),

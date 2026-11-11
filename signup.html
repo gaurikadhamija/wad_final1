@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create an Account — QueueLess</title>
+  <meta name="description" content="Sign up for QueueLess to join campus virtual queues, receive real-time notifications, or register your department service counter." />
+
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- QueueLess External Stylesheet -->
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+  <!-- Ambient Living Animated Background Layer -->
+  <div class="ambient-background-layer" aria-hidden="true">
+    <div class="ambient-orbs-container">
+      <div class="ambient-orb orb-1"></div>
+      <div class="ambient-orb orb-2"></div>
+      <div class="ambient-orb orb-3"></div>
+      <div class="ambient-orb orb-4"></div>
+    </div>
+  </div>
+
+  <!-- Top Academic / Demo Switcher Banner -->
+  <div class="demo-banner">
+    <div class="container demo-banner-content">
+      <div class="demo-banner-tag">
+        <span>QueueLess Platform</span>
+      </div>
+      <div class="demo-banner-links">
+        <span style="color: var(--color-text-muted);">Switch View:</span>
+        <a href="./student.html" class="demo-banner-link">Student Portal</a>
+        <a href="./provider.html" class="demo-banner-link">Service Provider</a>
+        <a href="./operator.html" class="demo-banner-link">Desk Operator</a>
+        <a href="./admin.html" class="demo-banner-link">Admin Console</a>
+        <a href="./about.html" class="demo-banner-link">About Project</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Site Header & Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="./index.html" class="brand-logo">
+        <img class="brand-logo-icon" src="./assets/QL-logo.png" alt="QueueLess">
+        <span>QueueLess</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="./index.html" class="nav-link">Home</a>
+        <a href="./index.html#how-it-works" class="nav-link">How It Works</a>
+        <a href="./index.html#popular-services" class="nav-link">Explore Services</a>
+        <a href="./about.html" class="nav-link">About Project</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="./index.html#login-modal" class="btn btn-outline btn-sm">
+          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Sign In
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="auth-wrapper">
+      <div class="auth-card">
+        
+        <!-- Header -->
+        <div class="auth-header">
+          <span class="badge badge-neutral" style="margin-bottom: 12px; display: inline-flex; align-items: center; gap: 6px;">
+            <span class="badge-dot" style="background-color: var(--color-salmon-pink);"></span>
+            Campus Virtual Registration
+          </span>
+          <h1 class="auth-title">Create your Account</h1>
+          <p class="auth-subtitle">
+            Join QueueLess to request digital boarding passes, monitor live queues remotely, or manage campus service desks.
+          </p>
+        </div>
+
+        <!-- Alert Notification Box -->
+        <div id="signup-alert" class="auth-alert" role="alert"></div>
+
+        <!-- Signup Form -->
+        <form id="signup-form" novalidate>
+
+          <!-- 1. Role Selection Tabs -->
+          <div class="form-group">
+            <label class="form-label">I am registering as a:</label>
+            <div class="auth-role-tabs">
+              
+              <!-- Student Option -->
+              <div>
+                <input type="radio" id="role-student" name="signup_role" value="student" class="role-radio-input" checked />
+                <label for="role-student" class="role-radio-label">
+                  <div class="role-icon-box">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                  </div>
+                  <div>
+                    <div class="role-title">Student / Visitor</div>
+                    <div class="role-desc">Join queues & track tokens</div>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Provider Option -->
+              <div>
+                <input type="radio" id="role-provider" name="signup_role" value="provider" class="role-radio-input" />
+                <label for="role-provider" class="role-radio-label">
+                  <div class="role-icon-box">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </div>
+                  <div>
+                    <div class="role-title">Service Desk Staff</div>
+                    <div class="role-desc">Administer counters & calls</div>
+                  </div>
+                </label>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- 2. Personal Information -->
+          <div class="form-group">
+            <label class="form-label" for="signup-name">Full Name <span style="color: var(--color-salmon-pink);">*</span></label>
+            <input type="text" id="signup-name" class="form-control" placeholder="e.g. Alex Morgan" required autocomplete="name" />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label" for="signup-email">Email Address <span style="color: var(--color-salmon-pink);">*</span></label>
+              <input type="email" id="signup-email" class="form-control" placeholder="name@college.edu" required autocomplete="email" />
+              <p class="form-help">College or personal email</p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="signup-phone">Mobile Number</label>
+              <input type="tel" id="signup-phone" class="form-control" placeholder="+91 98765 43210" autocomplete="tel" />
+              <p class="form-help">For turn SMS & WhatsApp alerts</p>
+            </div>
+          </div>
+
+          <!-- 3. Additional Provider Fields (conditionally shown) -->
+          <div id="provider-additional-fields" style="display: none; padding: 18px; background-color: var(--color-bg); border-radius: var(--radius-lg); margin-bottom: 20px; border: 1px dashed var(--color-border);">
+            <div style="font-weight: 700; color: var(--color-bole-dark); font-size: 0.9rem; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+              <svg class="icon-svg" style="width: 16px; height: 16px; color: var(--color-salmon-pink);" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Department & Counter Information
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="signup-org">Organization / Service Unit Name <span style="color: var(--color-salmon-pink);">*</span></label>
+              <input type="text" id="signup-org" class="form-control" placeholder="e.g. Dean of Students Welfare Office" />
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+              <div class="form-group">
+                <label class="form-label" for="signup-dept">Department Category</label>
+                <select id="signup-dept" class="form-control">
+                  <option value="Administration">Administration</option>
+                  <option value="Academic Affairs">Academic Affairs</option>
+                  <option value="Accounts & Finance">Accounts & Finance</option>
+                  <option value="Central Library">Central Library</option>
+                  <option value="Health & Medical Center">Health & Medical Center</option>
+                  <option value="IT & Network Services">IT & Network Services</option>
+                  <option value="Examination Division">Examination Division</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="signup-location">Campus Location / Room</label>
+                <input type="text" id="signup-location" class="form-control" placeholder="e.g. Room 104, Admin Block" />
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Password & Confirmation -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label" for="signup-password">Password <span style="color: var(--color-salmon-pink);">*</span></label>
+              <input type="password" id="signup-password" class="form-control" placeholder="Min. 6 characters" required autocomplete="new-password" />
+              
+              <!-- Password strength meter -->
+              <div class="password-meter-wrap">
+                <div class="password-meter-bar">
+                  <div class="password-meter-segment"></div>
+                  <div class="password-meter-segment"></div>
+                  <div class="password-meter-segment"></div>
+                  <div class="password-meter-segment"></div>
+                </div>
+                <div class="password-meter-text">
+                  <span>Strength:</span>
+                  <span id="password-strength-label" style="font-weight: 600;">Enter at least 6 characters</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="signup-confirm-password">Confirm Password <span style="color: var(--color-salmon-pink);">*</span></label>
+              <input type="password" id="signup-confirm-password" class="form-control" placeholder="Re-enter password" required autocomplete="new-password" />
+              <p class="form-help">Must match your password above</p>
+            </div>
+          </div>
+
+          <!-- 5. Terms & Privacy Agreement -->
+          <div class="form-group" style="margin-top: 10px;">
+            <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.84rem; color: var(--color-text-main); cursor: pointer; line-height: 1.45;">
+              <input type="checkbox" id="signup-terms" required checked style="margin-top: 3px; accent-color: var(--color-salmon-pink);" />
+              <span>
+                I agree to the <a href="./about.html" style="color: var(--color-salmon-pink); font-weight: 600; text-decoration: underline;">Terms of Service</a> and campus IT usage guidelines. I consent to receive real-time queue position alerts.
+              </span>
+            </label>
+          </div>
+
+          <!-- 6. Submit Button -->
+          <button type="submit" id="signup-submit-btn" class="btn btn-primary w-full" style="padding: 13px; font-size: 1.05rem; justify-content: center; margin-top: 10px;">
+            Create Free Account
+            <svg class="icon-svg" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+
+          <!-- 7. Bottom Sign In Switcher -->
+          <div class="auth-footer-prompt">
+            Already have a QueueLess account? 
+            <a href="./index.html#login-modal">Sign in directly</a>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Login Modal Dialog (Pure CSS :target support for instant sign-in popup) -->
+  <div id="login-modal" class="modal-overlay">
+    <a href="#" class="modal-overlay-backdrop-link" style="position: absolute; inset: 0;" aria-label="Close dialog"></a>
+    <div class="modal-box" style="position: relative; z-index: 2;">
+      <div class="modal-header">
+        <h3 class="modal-title">Sign In to QueueLess</h3>
+        <a href="#" class="modal-close-btn">&times;</a>
+      </div>
+
+      <form id="demo-login-form" action="./student.html" method="get">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Student ID or College Email</label>
+          <input type="text" id="login-email" class="form-control" placeholder="e.g. alex.morgan@college.edu or student@igdtuw.ac.in" value="student@igdtuw.ac.in" required />
+          <p class="form-help">Enter your registered email or demo credentials.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <input type="password" id="login-password" class="form-control" placeholder="••••••••" value="password123" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="login-role">Select Dashboard View</label>
+          <select id="login-role" class="form-control">
+            <option value="user">Student / Customer Dashboard</option>
+            <option value="provider">Service Desk / Staff Provider Dashboard</option>
+            <option value="operator">Desk Operator Terminal</option>
+            <option value="admin">System Administrator Console</option>
+            <option value="intelligence">QueueLess Intelligence Dashboard</option>
+          </select>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px;">
+          <a href="./signup.html" style="font-size: 0.85rem; color: var(--color-salmon-pink); font-weight: 600;">Create new account</a>
+          <div style="display: flex; gap: 10px;">
+            <a href="#" class="btn btn-outline">Cancel</a>
+            <button type="submit" class="btn btn-primary">Proceed to Dashboard</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <img class="brand-logo-icon" src="./assets/QL-logo.png" alt="QueueLess" style="width: 28px; height: 28px">
+            <span>QueueLess</span>
+          </div>
+          <p class="footer-tagline">
+            Your Time Matters. Waiting Doesn't. High-efficiency virtual queue management system for higher education campuses and customer administrative desks.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Platform</h4>
+          <ul class="footer-links">
+            <li><a href="./index.html" class="footer-link">Home</a></li>
+            <li><a href="./student.html" class="footer-link">Student Portal</a></li>
+            <li><a href="./provider.html" class="footer-link">Provider Dashboard</a></li>
+            <li><a href="./operator.html" class="footer-link">Operator Desk</a></li>
+            <li><a href="./admin.html" class="footer-link">Admin Console</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Account</h4>
+          <ul class="footer-links">
+            <li><a href="./signup.html" class="footer-link">Create Account</a></li>
+            <li><a href="./index.html#login-modal" class="footer-link">Sign In</a></li>
+            <li><a href="./about.html" class="footer-link">Architecture & Syllabus</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Direct Access</h4>
+          <ul class="footer-links">
+            <li><a href="./student.html" class="footer-link">Join Virtual Queue</a></li>
+            <li><a href="./provider.html" class="footer-link">Open Desk Terminal</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 QueueLess Virtual Queue Systems. Built with Pure HTML5, CSS3, Vanilla JavaScript, Core PHP & MySQL.</div>
+        <div>Campus Real-Time Queue Synchronization</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="./js/api.js"></script>
+  <script type="module" src="./js/script.js"></script>
+  <script type="module" src="./js/signup.js"></script>
+</body>
+</html>
